@@ -5,6 +5,9 @@ const handlers = require('./../controllers/tourController');
 //Parameter middleware - To check if the id sent as parameter(through url) is valid or invalid.
 //router.param('id', handlers.checkID);
 
+router.route('/top-5-tours')
+    .get(handlers.aliasTopTours, handlers.getAllTours);
+
 //To route further based on the url.
 router.route('/')
     .get(handlers.getAllTours)
