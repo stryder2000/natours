@@ -3,27 +3,41 @@ const express = require('express');
 const app = express();
 const AppError = require('./utils/AppError.js');
 const globalErrorHandler = require('./controllers/errorController');
-
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 const morgan = require('morgan');
 //morgan(3rd party middleware) is used to get logging info.
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 
-//MIDDLEWARE
+//GLOBAL MIDDLEWARE
+//Set security HTTP headers
+app.use(helmet());
+
+//Development logging
 if (process.env.NODE_ENV == 'development') {
     app.use(morgan('dev'));
 }
 
-app.use(express.json());
-app.use(express.static(`${__dirname}/public`));
-//Importing static files of the project.
-
-app.use((req, res, next) => {
-    console.log('Hello from app middleware 👋');
-    next();
+//limit requests from same API
+const limiter = new rateLimit({
+    max: 100,
+    windowsMs: 60 * 60 * 1000,
+    message:
+        'Too many requests from this IP. Please try again later in an hour!'
 });
 
+app.use('/api', limiter);
+
+//Body parser, reading data from body into req.body
+//Limits the incoming data to body to 10kb
+app.use(express.json({ limit: '10kb' }));
+
+//Serving static files - Importing static files of the project.
+app.use(express.static(`${__dirname}/public`));
+
+//Test middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
     next();
