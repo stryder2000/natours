@@ -1,18 +1,28 @@
 const express = require('express');
 const fs = require('fs');
-
 const router = express.Router();
 const handlers = require('./../controllers/userController');
 const auth = require('./../controllers/authController');
+const factory = require('./../controllers/handlerFactory');
+
 //const {checkID, getAllUsers, createNewUser, getUserByID, updateUser, deleteUser} = require(`${__dirname}/../controllers/userController`);
 
 router.post('/signup', auth.signup);
 router.post('/login', auth.login);
+router.get('/logout', auth.logout);
 router.post('/forgotPassword', auth.forgotPassword);
 router.patch('/resetPassword/:token', auth.resetPassword);
-router.patch('/updatePassword', auth.protect, auth.updatePassword);
-router.patch('/updateMe', auth.protect, handlers.updateMe);
-router.delete('/deleteMe', auth.protect, handlers.deleteMe);
+
+//Protects all routes after this middleware
+router.use(auth.protect);
+
+router.patch('/updatePassword', auth.updatePassword);
+router.patch('/updateMe', handlers.updateMe);
+router.delete('/deleteMe', handlers.deleteMe);
+router.route('/me').get(handlers.getMe, handlers.getUser);
+
+//Restrict access to admin after this middleware
+router.use(auth.restrictTo('admin'));
 
 router
     .route('/')
@@ -21,7 +31,7 @@ router
 
 router
     .route('/:id')
-    .get(handlers.getUserByID)
+    .get(handlers.getUser)
     .patch(handlers.updateUser)
     .delete(handlers.deleteUser);
 
