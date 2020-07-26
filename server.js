@@ -32,10 +32,9 @@ mongoose
     .then(con => console.log('DB connection successful!'));
 //.catch(err => console.log("ERROR 🎇"));
 
-const port = process.env.port || 3000;
-
-const server = app.listen(process.env.port,'0.0.0.0', () => {
-    console.log(`App running on port ${port}...`);
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
 });
 
 //Handling unhandled rajection promises -
@@ -49,6 +48,13 @@ process.on('unhandledRejection', err => {
         console.log(err.name, err.message);
         process.exit(1);
     });
+});
+
+process.on('SIGTERM', () => {
+  console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥 Process terminated!');
+  });
 });
 
 //To call upon the uncaught Exception defined above,
