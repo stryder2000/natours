@@ -2,7 +2,7 @@ const User = require('./../dev-data/models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/AppError');
-const sendMail = require('./../utils/email');
+const Email = require('./../utils/email');
 const { promisify } = require('util');
 const crypto = require('crypto');
 
@@ -43,12 +43,15 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+    console.log(req.body);
+
     const newUser = await User.create(req.body);
 
     //jwt.sign(payload-object, secret string present only on server, {options})
     //expiresIn option specifies the time in which the token with expire automatically
     //jwt.sign() uses SHA256 algo for encryption.
-
+    const url = `${req.protocol}://${req.get('host')}/me`;
+    await new Email(newUser, url).sendWelcome();
     createSendToken(newUser, 201, res);
 });
 
@@ -195,18 +198,19 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     //& when the validators run again when we save the document, an error is displayed.
 
     //3)Send it to user's email.
-    const resetURL = `${req.protocol}://${req.get(
-        'host'
-    )}/api/v1/users/resetPassword/${resetToken}`;
-
-    const message = `Password bhul gye? Abhi submit karen PATCH request password or confirmPassword ke sath : ${resetURL} par.\nAGAR APKO APNA PASSWORD YAAD HAI TOH KRIPAYA MESSAGE PAR DHYAN NA DEN! DHANYAWAAD.`;
 
     try {
-        await sendMail({
-            email: user.email,
-            subject: 'Your Password Reset Token (valid for 10 min)',
-            message
-        });
+        //        await sendMail({
+        //            email: user.email,
+        //            subject: 'Your Password Reset Token (valid for 10 min)',
+        //            message
+        //        });
+
+        const resetURL = `${req.protocol}://${req.get(
+            'host'
+        )}/api/v1/users/resetPassword/${resetToken}`;
+
+        await new Email(user, resetURL).sendPasswordReset();
 
         res.status(200).json({
             status: 'success',

@@ -1,14 +1,17 @@
 import '@babel/polyfill';
 import { displayMap } from './mapbox';
-import { login, logout } from './login';
+import { login, logout, signup } from './login';
 import { updateUserSettings } from './updateSettings';
+import { bookTour } from './stripe';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateUserForm = document.querySelector('.form-user-data');
 const updateUserPassword = document.querySelector('.form-user-password');
+const bookBtn = document.getElementById('book-tour');
 
 //DELEGATION
 if (mapBox) {
@@ -26,6 +29,23 @@ if (loginForm) {
     });
 }
 
+if (signupForm) {
+    signupForm.addEventListener('submit', e => {
+        e.preventDefault();
+        let form = new FormData();
+
+        form.append('name', document.getElementById('name').value);
+        form.append('email', document.getElementById('email').value);
+        form.append('password', document.getElementById('password').value);
+        form.append(
+            'confirmPassword',
+            document.getElementById('confirm-password').value
+        );
+        document.getElementById('signup').textContent = 'Signing up...'
+        signup(form);
+    });
+}
+
 if (logOutBtn) {
     logOutBtn.addEventListener('click', logout);
 }
@@ -33,9 +53,12 @@ if (logOutBtn) {
 if (updateUserForm) {
     updateUserForm.addEventListener('submit', e => {
         e.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        updateUserSettings({ name, email }, 'data');
+        const form = new FormData();
+        form.append('name', document.getElementById('name').value);
+        form.append('email', document.getElementById('email').value);
+        form.append('photo', document.getElementById('photo').files[0]);
+
+        updateUserSettings(form, 'data');
     });
 }
 
@@ -49,7 +72,7 @@ if (updateUserPassword) {
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('password-confirm')
             .value;
-        
+
         await updateUserSettings(
             { passwordCurrent, password, confirmPassword },
             'password'
@@ -62,3 +85,10 @@ if (updateUserPassword) {
             'Save Password';
     });
 }
+
+if (bookBtn)
+    bookBtn.addEventListener('click', e => {
+        e.target.textContent = 'Processing...';
+        const { tourId } = e.target.dataset;
+        bookTour(tourId);
+    });

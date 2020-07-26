@@ -17,7 +17,14 @@ router.patch('/resetPassword/:token', auth.resetPassword);
 router.use(auth.protect);
 
 router.patch('/updatePassword', auth.updatePassword);
-router.patch('/updateMe', handlers.updateMe);
+router.patch(
+    '/updateMe',
+    handlers.uploadUserPhoto,
+    handlers.resizeUserPhoto,
+    handlers.updateMe
+);
+//upload.single('field-name')
+//field name is the name of the field in the form from which to extract the file.
 router.delete('/deleteMe', handlers.deleteMe);
 router.route('/me').get(handlers.getMe, handlers.getUser);
 

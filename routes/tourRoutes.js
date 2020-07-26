@@ -11,7 +11,9 @@ router.use('/:tourId/reviews', reviewRouter);
 //Parameter middleware - To check if the id sent as parameter(through url) is valid or invalid.
 //router.param('id', handlers.checkID);
 
-router.route('/tours-within/:distance/center/:latlong/unit/:unit').get(handlers.getToursWithin);
+router
+    .route('/tours-within/:distance/center/:latlong/unit/:unit')
+    .get(handlers.getToursWithin);
 router.route('/distances/:latlong/unit/:unit').get(handlers.getDistances);
 
 router.route('/top-5-tours').get(handlers.aliasTopTours, handlers.getAllTours);
@@ -40,6 +42,8 @@ router
     .patch(
         auth.protect,
         auth.restrictTo('admin', 'lead-guide'),
+        handlers.uploadTourImages,
+        handlers.resizeTourImages,
         handlers.updateTour
     )
     .delete(
