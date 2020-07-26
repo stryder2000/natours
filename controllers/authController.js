@@ -12,19 +12,18 @@ const signToken = id => {
     });
 };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
-    const cookieOptions = {
+
+    //res.cookie(cookieName, cookieContent, options);
+    res.cookie('jwt', token, {
         expires: new Date(
             Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
-        httpOnly: true
-    };
+        httpOnly: true,
+        secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+    });
 
-    //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-    //res.cookie(cookieName, cookieContent, options);
-    res.cookie('jwt', token, cookieOptions);
     //options -
     //expires : the cookie expires automatically after a certain time.
     //secure : cookie is transported through https or an encrypted connection.
@@ -43,7 +42,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-//    console.log(req.body);
+    //    console.log(req.body);
 
     const newUser = await User.create(req.body);
 
@@ -52,7 +51,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     //jwt.sign() uses SHA256 algo for encryption.
     const url = `${req.protocol}://${req.get('host')}/me`;
     await new Email(newUser, url).sendWelcome();
-    createSendToken(newUser, 201, res);
+    createSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -70,7 +69,7 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError('Incorrect email or password!', 401));
     }
     //3) If everything is okay, then send token to client.
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
 
 exports.logout = async (req, res, next) => {
@@ -251,7 +250,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     //Note that we use here save() instead of update() or findOneAndUpdate() bcz save() would run the validators and hooks(middleware) for the model again.
 
     //4) Log the user in, send JWT
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -271,5 +270,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     await user.save();
 
     //4) Log user in, send JWT
-    createSendToken(user, 200, res);
+    createSendToken(user, 200, req, res);
 });
