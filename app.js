@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const AppError = require('./utils/AppError.js');
+const compression = require('compression');
 const globalErrorHandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
@@ -71,6 +72,7 @@ app.use(
     })
 );
 
+app.use(compression());
 //Test middleware
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
