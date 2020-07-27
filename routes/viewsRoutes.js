@@ -6,7 +6,7 @@ const bookingController = require('./../controllers/bookingController');
 
 router.get(
     '/',
-    bookingController.createBookingCheckout,
+//    bookingController.createBookingCheckout,
     auth.isLoggedIn,
     viewsController.getOverview
 );
