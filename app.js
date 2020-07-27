@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const AppError = require('./utils/AppError.js');
 const compression = require('compression');
+const cors = require('cors');
 const globalErrorHandler = require('./controllers/errorController');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
@@ -28,6 +29,16 @@ app.set('views', path.join(__dirname, 'views'));
 //'views' stands for 'View Settings'
 
 //GLOBAL MIDDLEWARE
+
+//For handling simple CORS(Cross Origin Resource Sharing) requests.
+app.use(cors());
+//Access-Control-Allow-Origin *
+
+//For handling non-simple CORS requests.
+app.options('*', cors());
+//Non-simple requests would be valid only for the specified route.
+//app.options('/api/v1/tours/:id', cors());
+
 //Serving static files - Importing static files of the project.
 app.use(express.static(path.join(__dirname, 'public')));
 
