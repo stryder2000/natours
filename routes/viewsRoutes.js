@@ -4,9 +4,10 @@ const viewsController = require('./../controllers/viewsController');
 const auth = require('./../controllers/authController');
 const bookingController = require('./../controllers/bookingController');
 
+router.use(viewsController.alerts);
 router.get(
     '/',
-//    bookingController.createBookingCheckout,
+    //    bookingController.createBookingCheckout,
     auth.isLoggedIn,
     viewsController.getOverview
 );

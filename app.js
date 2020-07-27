@@ -21,7 +21,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
-const bookingController = require('./routes/bookingController');
+const bookingController = require('./controllers/bookingController');
 
 app.enable('trust proxy');
 

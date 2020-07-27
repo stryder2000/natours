@@ -3,6 +3,7 @@ import { displayMap } from './mapbox';
 import { login, logout, signup } from './login';
 import { updateUserSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -41,7 +42,7 @@ if (signupForm) {
             'confirmPassword',
             document.getElementById('confirm-password').value
         );
-        document.getElementById('signup').textContent = 'Signing up...'
+        document.getElementById('signup').textContent = 'Signing up...';
         signup(form);
     });
 }
@@ -92,3 +93,9 @@ if (bookBtn)
         const { tourId } = e.target.dataset;
         bookTour(tourId);
     });
+
+const alertMessage = document.querySelector('body').dataset.alert;
+
+if (alertMessage) {
+    showAlert('success', alertMessage, 20);
+}
