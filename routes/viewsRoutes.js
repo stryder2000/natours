@@ -16,5 +16,6 @@ router.get('/signup', viewsController.getSignupForm);
 router.get('/me', auth.protect, viewsController.getAccount);
 router.get('/my-tours', auth.protect, viewsController.getMyTours);
 router.post('/submit-user-data', auth.protect, viewsController.updateUserData);
-
+router.get('/forgot-password', viewsController.getForgotPasswordForm);
+router.get('/password-reset/:token', viewsController.getPasswordResetForm);
 module.exports = router;

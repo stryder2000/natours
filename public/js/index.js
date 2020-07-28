@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 import { displayMap } from './mapbox';
-import { login, logout, signup } from './login';
+import { login, logout, signup, passwordReset, forgotPassword} from './login';
 import { updateUserSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
@@ -8,6 +8,8 @@ import { showAlert } from './alerts';
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
+const forgotPasswordForm = document.querySelector('.form--forgotPassword');
+const passwordResetForm = document.getElementById('resetPassword');
 const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateUserForm = document.querySelector('.form-user-data');
@@ -30,6 +32,25 @@ if (loginForm) {
     });
 }
 
+if(forgotPasswordForm){
+    forgotPasswordForm.addEventListener('submit', e=> {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        //console.log(email);
+        forgotPassword(email);
+    })
+}
+if(passwordResetForm){
+    passwordResetForm.addEventListener('click', e=> {
+        e.preventDefault();
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        console.log(password, confirmPassword);
+        passwordReset(password, confirmPassword);
+    })
+}
 if (signupForm) {
     signupForm.addEventListener('submit', e => {
         e.preventDefault();

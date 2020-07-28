@@ -1322,3 +1322,49 @@ body {
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
 }
+
+.forgot-password{
+    color: #00376b;
+    color: rgba(var(--fe0,0,55,107),1);
+    font-size: 16px;
+    line-height: 14px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.forgot-password:hover{
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.nav__el--2,
+.nav__el--2:link,
+.nav__el--2:visited {
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  text-decoration: none;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  font-weight:600;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  align-self: center;
+}
+.nav__el--2:hover,
+.nav__el--2:active {
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 0.1rem 0.3rem #55c57a;
+  border: 1px solid #55c57a;
+  border-radius: 12px;
+}
