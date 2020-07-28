@@ -1,8 +1,9 @@
 const stripe = require('stripe')(
     'sk_test_51H8TgkGn4dG3D9SdasKbVTzaH1LGjcrfuagNafcR7tQrItqm7zxNLZbUiwb0xXlj05xOuOi6riuLPI3Vib940MrG00RlUsj2Bn'
 );
-const Tour = require('../dev-data/models/tourModel.js');
-const Booking = require('../dev-data/models/bookingModel.js');
+const Tour = require('../dev-data/models/tourModel');
+const User = require('../dev-data/models/userModel');
+const Booking = require('../dev-data/models/bookingModel');
 
 const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
@@ -20,7 +21,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         // }&user=${req.user.id}&price=${tour.price}`,
         success_url: `${req.protocol}://${req.get(
             'host'
-        )}/my-tours/?alert=booking`,
+        )}/my-tours?alert=booking`,
         cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
         customer_email: req.user.email,
         client_reference_id: req.params.tourId,
@@ -55,17 +56,17 @@ exports.webhookCheckout = async (req, res, next) => {
         event = stripe.webhooks.constructEvent(
             req.body,
             signature,
-            process.env.STRIPE_WEBHOOK_SECRET
+            'whsec_DkiRmcFovlhkFAtTPOJu7ZtxQ0EjqLfh'
         );
     } catch (err) {
         return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    if (event[type] === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
         const tour = session.client_reference_id;
         const user = (await User.findOne({ email: session.customer_email })).id;
-        const price = session.display_items[0].amount / 100;
+        const price = session.display_items[0].amount/100;
         await Booking.create({ tour, user, price });
     }
 
