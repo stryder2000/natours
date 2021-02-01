@@ -20,6 +20,9 @@
 ### Forgot Password Portal
 ![](images/natours-forgotPassword.png)
 
+### Stripe Payment
+![](images/natours-stripe.png)
+
 ### Book Tour Page
 ![](images/natours-bookTour.png)
 
