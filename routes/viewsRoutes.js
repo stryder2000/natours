@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const viewsController = require('./../controllers/viewsController');
 const auth = require('./../controllers/authController');
-const bookingController = require('./../controllers/bookingController');
+//const bookingController = require('./../controllers/bookingController');
 
 router.use(viewsController.alerts);
 router.get(

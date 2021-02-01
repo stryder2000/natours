@@ -150,7 +150,7 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     ]);
 
     res.status(200).json({
-        status: 'successPlan',
+        status: 'success',
         data: {
             plan
         }
