@@ -4,11 +4,11 @@
 //the errors that are defined synchronously after the handler.
 //So we ideally define the handler at the top so that all exceptions
 //are caught.
-process.on('uncaughtException', err => {
-    console.log('UNCAUGHT EXCEPTION! 🎇 Shutting down..');
-    console.log(err.name, err.message);
-    console.log(err);
-    process.exit(1);
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! 🎇 Shutting down..');
+  console.log(err.name, err.message);
+  console.log(err);
+  process.exit(1);
 });
 
 const mongoose = require('mongoose');
@@ -18,19 +18,19 @@ const app = require('./app');
 dotenv.config({ path: './config.env' });
 
 const DB = process.env.DATABASE.replace(
-    '<PASSWORD>',
-    process.env.DATABASE_PASSWORD
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
 );
 
 mongoose
-//        .connect(process.env.DATABASE_LOCAL,{
-    .connect(DB, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true
-    })
-    .then(con => console.log('DB connection successful!'));
+  // .connect(process.env.DATABASE_LOCAL, {
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  })
+  .then((con) => console.log('DB connection successful!'));
 //.catch(err => console.log("ERROR 🎇"));
 
 const port = process.env.PORT || 3000;
@@ -43,12 +43,12 @@ const server = app.listen(port, () => {
 //asynchronous code that were not handled previously.
 //Note that these act as a safety net to all the
 //unhandled rejections.
-process.on('unhandledRejection', err => {
-    console.log('UNHANDLED REJECTION! 🎇 Shutting down..');
-    server.close(() => {
-        console.log(err.name, err.message);
-        process.exit(1);
-    });
+process.on('unhandledRejection', (err) => {
+  console.log('UNHANDLED REJECTION! 🎇 Shutting down..');
+  server.close(() => {
+    console.log(err.name, err.message);
+    process.exit(1);
+  });
 });
 
 process.on('SIGTERM', () => {

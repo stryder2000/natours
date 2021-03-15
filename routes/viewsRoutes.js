@@ -5,11 +5,8 @@ const auth = require('./../controllers/authController');
 //const bookingController = require('./../controllers/bookingController');
 
 router.use(viewsController.alerts);
-router.get(
-    '/',
-    auth.isLoggedIn,
-    viewsController.getOverview
-);
+router.get('/', viewsController.getLanding);
+router.get('/overview', auth.isLoggedIn, viewsController.getOverview);
 router.get('/tour/:slug', auth.isLoggedIn, viewsController.getTour);
 router.get('/login', auth.isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', viewsController.getSignupForm);
