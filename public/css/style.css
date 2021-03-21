@@ -98,6 +98,20 @@ body {
   background-color: #e0e0e0;
 }
 
+.line-v {
+  margin: 0.8rem;
+  height: 65px;
+  width: 1px;
+  background-color: #e0e0e0;
+}
+
+.line-h {
+  margin: 0.8rem;
+  width: 80%;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
 .alert {
   position: fixed;
   top: 0;
@@ -1293,6 +1307,93 @@ body {
   justify-self: end;
   -ms-flex-item-align: center;
   align-self: center;
+}
+
+.booked {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  border-radius: 3px;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.07);
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.booked__heading {
+  font-weight: 200;
+  letter-spacing: 0.4rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.booked__details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.booked__data {
+  padding: 1rem;
+  padding-left: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.booked__data-price {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-weight: 700;
+}
+
+.booked__data-text {
+  color: #444;
+  font-size: 1.8rem;
+}
+
+.booked__footer {
+  background-color: #f7f7f7;
+  padding: 2.5rem 3rem;
+  border-top: 1px solid #f1f1f1;
+  font-size: 1.4rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+.line-h {
+  display: none;
+}
+@media only screen and (max-width: 40em) {
+  .booked__heading {
+    margin: 0;
+  }
+
+  .booked__details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .booked__data-text {
+    font-size: 1.6rem;
+  }
+
+  .booked__footer {
+    padding: 0;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 34.375em) {
+  .booked {
+    flex-direction: column;
+  }
+  .line-v {
+    display: none;
+  }
+  .line-h {
+    display: inline-block;
+  }
 }
 
 .error {
