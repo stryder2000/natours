@@ -12,12 +12,12 @@
     <!-- <link rel="stylesheet" href="css/icon-font.css" /> -->
     <link rel="stylesheet" href="css/style2.css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
     <script>
-      var closeNav = () => {
+      window.closeNav = () => {
         document.getElementById('nav-toggle').checked = false;
       };
     </script>
-
     <title>Natours | Exciting tours for adventurous people</title>
   </head>
   <body>
@@ -107,7 +107,7 @@
           </h2>
         </div>
         <div class="row">
-          <div class="col-1-of-2">
+          <div class="col-1-of-2 u-left-text">
             <h2 class="heading-tertiary u-margin-bottom-sm">
               You're going to fall in love with nature
             </h2>
@@ -380,7 +380,7 @@
         <div class="row">
           <div class="book">
             <div class="book__form">
-              <form action="#" class="form">
+              <form class="landingform--login">
                 <div class="u-margin-bottom-md">
                   <h2 class="heading-secondary">
                     Start Booking Now!
@@ -388,27 +388,27 @@
                 </div>
                 <div class="form__group">
                   <input
-                    type="text"
-                    class="form__input"
-                    placeholder="Full name"
-                    id="name"
-                    required
-                  />
-                  <label for="name" class="form__label">Full name</label>
-                </div>
-                <div class="form__group">
-                  <input
                     type="email"
                     class="form__input"
                     placeholder="Email Address"
-                    id="email"
+                    id="landingEmail"
                     required
                   />
                   <label for="email" class="form__label">Email Address</label>
                 </div>
-                <button class="btn btn--green">
-                  Next Step &rarr;
-                </button>
+                <div class="form__group">
+                  <input
+                    type="password"
+                    class="form__input"
+                    placeholder="••••••••"
+                    id="landingPassword"
+                    required
+                  />
+                  <label for="password" class="form__label">Password</label>
+                </div>
+                <a href="/login" class="btn btn--green">
+                  Login &rarr;
+                </a>
               </form>
             </div>
           </div>

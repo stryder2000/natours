@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 import { displayMap } from './mapbox';
-import { login, logout, signup, passwordReset, forgotPassword} from './login';
+import { login, logout, signup, passwordReset, forgotPassword } from './login';
 import { updateUserSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
@@ -18,102 +18,97 @@ const bookBtn = document.getElementById('book-tour');
 
 //DELEGATION
 if (mapBox) {
-    const locations = JSON.parse(mapBox.dataset.locations);
-    displayMap(locations);
+  const locations = JSON.parse(mapBox.dataset.locations);
+  displayMap(locations);
 }
 
 if (loginForm) {
-    loginForm.addEventListener('submit', e => {
-        e.preventDefault();
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        login(email, password);
-    });
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    login(email, password);
+  });
 }
 
-if(forgotPasswordForm){
-    forgotPasswordForm.addEventListener('submit', e=> {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value;
-        //console.log(email);
-        forgotPassword(email);
-    })
-}
-if(passwordResetForm){
-    passwordResetForm.addEventListener('click', e=> {
-        e.preventDefault();
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        console.log(password, confirmPassword);
-        passwordReset(password, confirmPassword);
-    })
+    const email = document.getElementById('email').value;
+    forgotPassword(email);
+  });
+}
+if (passwordResetForm) {
+  passwordResetForm.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    console.log(password, confirmPassword);
+    passwordReset(password, confirmPassword);
+  });
 }
 if (signupForm) {
-    signupForm.addEventListener('submit', e => {
-        e.preventDefault();
-        let form = new FormData();
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let form = new FormData();
 
-        form.append('name', document.getElementById('name').value);
-        form.append('email', document.getElementById('email').value);
-        form.append('password', document.getElementById('password').value);
-        form.append(
-            'confirmPassword',
-            document.getElementById('confirm-password').value
-        );
-        document.getElementById('signup').textContent = 'Signing up...';
-        signup(form);
-    });
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('password', document.getElementById('password').value);
+    form.append(
+      'confirmPassword',
+      document.getElementById('confirm-password').value
+    );
+    document.getElementById('signup').textContent = 'Signing up...';
+    signup(form);
+  });
 }
 
 if (logOutBtn) {
-    logOutBtn.addEventListener('click', logout);
+  logOutBtn.addEventListener('click', logout);
 }
 
 if (updateUserForm) {
-    updateUserForm.addEventListener('submit', e => {
-        e.preventDefault();
-        const form = new FormData();
-        form.append('name', document.getElementById('name').value);
-        form.append('email', document.getElementById('email').value);
-        form.append('photo', document.getElementById('photo').files[0]);
+  updateUserForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
 
-        updateUserSettings(form, 'data');
-    });
+    updateUserSettings(form, 'data');
+  });
 }
 
 if (updateUserPassword) {
-    updateUserPassword.addEventListener('submit', async e => {
-        e.preventDefault();
-        document.querySelector('.btn--save-password').textContent =
-            'Updating...';
-        const passwordCurrent = document.getElementById('password-current')
-            .value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('password-confirm')
-            .value;
+  updateUserPassword.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    document.querySelector('.btn--save-password').textContent = 'Updating...';
+    const passwordCurrent = document.getElementById('password-current').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('password-confirm').value;
 
-        await updateUserSettings(
-            { passwordCurrent, password, confirmPassword },
-            'password'
-        );
+    await updateUserSettings(
+      { passwordCurrent, password, confirmPassword },
+      'password'
+    );
 
-        document.getElementById('password-current').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('password-confirm').value = '';
-        document.querySelector('.btn--save-password').textContent =
-            'Save Password';
-    });
+    document.getElementById('password-current').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('password-confirm').value = '';
+    document.querySelector('.btn--save-password').textContent = 'Save Password';
+  });
 }
 
 if (bookBtn)
-    bookBtn.addEventListener('click', e => {
-        e.target.textContent = 'Processing...';
-        const { tourId } = e.target.dataset;
-        bookTour(tourId);
-    });
+  bookBtn.addEventListener('click', (e) => {
+    e.target.textContent = 'Processing...';
+    const { tourId } = e.target.dataset;
+    bookTour(tourId);
+  });
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);

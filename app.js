@@ -14,6 +14,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const morgan = require('morgan');
+
 //morgan(3rd party middleware) is used to get logging info.
 const viewsRouter = require('./routes/viewsRoutes');
 const tourRouter = require('./routes/tourRoutes');
@@ -47,24 +48,23 @@ app.use(helmet());
 
 //Development logging
 if (process.env.NODE_ENV == 'development') {
-    app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 //limit requests from same API
 const limiter = new rateLimit({
-    max: 100,
-    windowsMs: 60 * 60 * 1000,
-    message:
-        'Too many requests from this IP. Please try again later in an hour!'
+  max: 100,
+  windowsMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP. Please try again later in an hour!',
 });
 
 app.use('/api', limiter);
 
 // Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
 app.post(
-    '/webhook-checkout',
-    express.raw({ type: 'application/json' }),
-    bookingController.webhookCheckout
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
 );
 
 //Body parser, reading data from body into req.body
@@ -81,22 +81,22 @@ app.use(xss());
 
 //Prevent Parameter Pollution
 app.use(
-    hpp({
-        whitelist: [
-            'duration',
-            'ratingsAverage',
-            'price',
-            'difficulty',
-            'maxGroupSize'
-        ]
-    })
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsAverage',
+      'price',
+      'difficulty',
+      'maxGroupSize',
+    ],
+  })
 );
 
 app.use(compression());
 //Test middleware
 app.use((req, res, next) => {
-    req.requestTime = new Date().toISOString();
-    next();
+  req.requestTime = new Date().toISOString();
+  next();
 });
 
 //app.use(morgan('tiny'));
@@ -117,11 +117,11 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
-    //    const err = new Error(`Can't find ${req.originalUrl} on the server!`);
-    //    err.statusCode = 404;
-    //    err.status = 'fail';
-    //    next(err);
-    next(new AppError(`Can't find ${req.originalUrl} on the server!`, 404));
+  //    const err = new Error(`Can't find ${req.originalUrl} on the server!`);
+  //    err.statusCode = 404;
+  //    err.status = 'fail';
+  //    next(err);
+  next(new AppError(`Can't find ${req.originalUrl} on the server!`, 404));
 });
 
 //Global error handling middleware - It handles all the errors

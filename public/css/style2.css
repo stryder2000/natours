@@ -638,6 +638,9 @@ body {
 .u-center-text {
   text-align: center !important;
 }
+.u-left-text {
+  text-align: left !important;
+}
 .u-margin-bottom-sm {
   margin-bottom: 1.5rem !important;
 }
@@ -1281,6 +1284,7 @@ body {
 }
 .row [class^='col-'] {
   float: left;
+  text-align: center;
 }
 .row [class^='col-']:not(:last-child) {
   margin-right: 6rem;
