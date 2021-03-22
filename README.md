@@ -3,7 +3,7 @@
 ## *This is a tour Booking Web-application project where a user can book tours, make payment, update profile, write reviews on tours that he takes, with enhanced security measures and compression tools. The admin of the website gets extra privileges like he can get the list of all the users, delete a user, or search users by their allotted Id.*
 
 ### Main Landing Page
-![](images/natours-main.png)
+![](images/natours-main.png) ![](images/natours-main2.png)
 
 ### Login Page
 ![](images/natours-login.png)
@@ -13,6 +13,11 @@
 
 ### User Profile Page
 ![](images/natours-userProfile.png)
+![](images/natours-userProfile2.png)
+
+### My Bookings Page
+![](images/natours-myBookings.png)
+![](images/natours-myBookings2.png)
 
 ### Reset Password Page
 ![](images/natours-resetPassword.png)
