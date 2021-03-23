@@ -12,6 +12,8 @@ var _stripe = require("./stripe");
 
 var _alerts = require("./alerts");
 
+var _reviews = require("./reviews");
+
 //DOM ELEMENTS
 var mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
@@ -21,7 +23,8 @@ var signupForm = document.querySelector('.form--signup');
 var logOutBtn = document.querySelector('.nav__el--logout');
 var updateUserForm = document.querySelector('.form-user-data');
 var updateUserPassword = document.querySelector('.form-user-password');
-var bookBtn = document.getElementById('book-tour'); //DELEGATION
+var bookBtn = document.getElementById('book-tour');
+var reviewBtn = document.querySelector('.review-btn'); //DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -117,10 +120,43 @@ if (updateUserPassword) {
   });
 }
 
-if (bookBtn) bookBtn.addEventListener('click', function (e) {
-  e.target.textContent = 'Processing...';
-  var tourId = e.target.dataset.tourId;
-  (0, _stripe.bookTour)(tourId);
-});
+if (bookBtn) {
+  bookBtn.addEventListener('click', function (e) {
+    e.target.textContent = 'Processing...';
+    var tourId = e.target.dataset.tourId;
+    (0, _stripe.bookTour)(tourId);
+  });
+}
+
+if (reviewBtn) {
+  reviewBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var review = document.querySelector('.review__input').value;
+    var tour = document.getElementById('data-tour').value;
+    var rating = 0;
+
+    if (document.getElementById('star1').checked) {
+      rating = 1;
+    } else if (document.getElementById('star2').checked) {
+      rating = 2;
+    } else if (document.getElementById('star3').checked) {
+      rating = 3;
+    } else if (document.getElementById('star4').checked) {
+      rating = 4;
+    } else if (document.getElementById('star5').checked) {
+      rating = 5;
+    }
+
+    if (review && rating != 0) {
+      var data = {
+        review: review,
+        rating: rating,
+        tour: tour
+      };
+      (0, _reviews.addReview)(data);
+    }
+  });
+}
+
 var alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 20);

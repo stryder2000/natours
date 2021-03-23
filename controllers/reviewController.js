@@ -4,9 +4,9 @@ const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
 
 exports.setTourUserIds = catchAsync(async (req, res, next) => {
-    if (!req.body.user) req.body.user = req.user.id;
-    if (!req.body.tour) req.body.tour = req.params.tourId;
-    next();
+  if (!req.body.user) req.body.user = req.user.id;
+  if (!req.body.tour) req.body.tour = req.params.tourId;
+  next();
 });
 
 exports.createNewReview = factory.createOne(Review);

@@ -4,6 +4,7 @@ import { login, logout, signup, passwordReset, forgotPassword } from './login';
 import { updateUserSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { addReview } from './reviews';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -15,6 +16,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const updateUserForm = document.querySelector('.form-user-data');
 const updateUserPassword = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+const reviewBtn = document.querySelector('.review-btn');
 
 //DELEGATION
 if (mapBox) {
@@ -103,12 +105,43 @@ if (updateUserPassword) {
   });
 }
 
-if (bookBtn)
+if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing...';
     const { tourId } = e.target.dataset;
     bookTour(tourId);
   });
+}
+
+if (reviewBtn) {
+  reviewBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const review = document.querySelector('.review__input').value;
+    const tour = document.getElementById('data-tour').value;
+    let rating = 0;
+    if (document.getElementById('star1').checked) {
+      rating = 1;
+    } else if (document.getElementById('star2').checked) {
+      rating = 2;
+    } else if (document.getElementById('star3').checked) {
+      rating = 3;
+    } else if (document.getElementById('star4').checked) {
+      rating = 4;
+    } else if (document.getElementById('star5').checked) {
+      rating = 5;
+    }
+
+    if (review && rating != 0) {
+      const data = {
+        review,
+        rating,
+        tour,
+      };
+      addReview(data);
+    }
+  });
+}
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
