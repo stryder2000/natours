@@ -79,20 +79,23 @@ block content
                 for star in [1, 2, 3, 4, 5]
                     svg.reviews__star(class=`reviews__star--${star <= review.rating ? 'active' : 'inactive' }`)
                       use(xlink:href='/img/icons.svg#icon-star')
+              if review.user.id == user.id
+                div.deleteBtn(data-review=`${review.id}`) Delete
+
       .add-review.form__group
         input.form__input.review__input(type='text', placeholder=`Add Comment here`, required)
         input#data-tour(type='hidden', value=`${tour.id}`)
         .rate#rating
           input#star5(type='radio' name='rate' value="5")
-          label(for='star5' title='text') 5 stars
+          label(for='star5') 5 stars
           input#star4(type='radio' name='rate' value="4")
-          label(for='star4' title='text') 4 stars
+          label(for='star4') 4 stars
           input#star3(type='radio' name='rate' value="3")
-          label(for='star3' title='text') 3 stars
+          label(for='star3') 3 stars
           input#star2(type='radio' name='rate' value="2")
-          label(for='star2' title='text') 2 stars
+          label(for='star2') 2 stars
           input#star1(type='radio' name='rate' value="1")
-          label(for='star1' title='text') 1 star
+          label(for='star1') 1 star
         button.btn.btn--small.btn--green.review-btn Comment
 
     section.section-cta

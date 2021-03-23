@@ -4,7 +4,7 @@ import { login, logout, signup, passwordReset, forgotPassword } from './login';
 import { updateUserSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
-import { addReview } from './reviews';
+import { addReview, deleteReview } from './reviews';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -17,6 +17,7 @@ const updateUserForm = document.querySelector('.form-user-data');
 const updateUserPassword = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const reviewBtn = document.querySelector('.review-btn');
+const deleteReviewBtn = document.querySelector('.deleteBtn');
 
 //DELEGATION
 if (mapBox) {
@@ -140,6 +141,14 @@ if (reviewBtn) {
       };
       addReview(data);
     }
+  });
+}
+
+if (deleteReviewBtn) {
+  deleteReviewBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const { review } = e.target.dataset;
+    deleteReview(review);
   });
 }
 

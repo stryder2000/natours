@@ -742,6 +742,7 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  position: relative;
 }
 
 .reviews__card--active {
@@ -1729,16 +1730,15 @@ body {
 }
 
 .rate {
-  /* float: right; */
   display: inline-block;
-
   height: 46px;
   padding: 0 10px;
 }
+
 .rate:not(:checked) > input {
-  position: absolute;
-  top: -9999px;
+  display: none;
 }
+
 .rate:not(:checked) > label {
   float: right;
   width: 1em;
@@ -1789,4 +1789,33 @@ body {
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
   color: #c59b08;
+}
+
+.deleteBtn {
+  display: inline-block;
+  background-color: #e23b3b;
+  padding: 0.5rem 1rem;
+  color: white;
+  margin: 0.5rem;
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  font-size: 1.5rem;
+  border-radius: 7px;
+  font-weight: 550;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+.deleteBtn:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+  background-color: #ff5e5e;
+  transform: translateY(-2px);
+}
+
+.deleteBtn:focus,
+.deleteBtn:active {
+  box-shadow: 0;
+  background-color: #e23b3b;
+  transform: translateY(0);
 }

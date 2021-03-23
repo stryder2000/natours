@@ -21,3 +21,23 @@ export const addReview = async (data) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const deleteReview = async (reviewId) => {
+  try {
+    const url = '/api/v1/reviews/' + reviewId;
+
+    const res = await axios({
+      method: 'DELETE',
+      url,
+    });
+    if (res.status === 204) {
+      showAlert('success', `Comment deleted Successfully!`);
+
+      window.setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};

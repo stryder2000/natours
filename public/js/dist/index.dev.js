@@ -24,7 +24,8 @@ var logOutBtn = document.querySelector('.nav__el--logout');
 var updateUserForm = document.querySelector('.form-user-data');
 var updateUserPassword = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
-var reviewBtn = document.querySelector('.review-btn'); //DELEGATION
+var reviewBtn = document.querySelector('.review-btn');
+var deleteReviewBtn = document.querySelector('.deleteBtn'); //DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -155,6 +156,14 @@ if (reviewBtn) {
       };
       (0, _reviews.addReview)(data);
     }
+  });
+}
+
+if (deleteReviewBtn) {
+  deleteReviewBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var review = e.target.dataset.review;
+    (0, _reviews.deleteReview)(review);
   });
 }
 
