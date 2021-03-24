@@ -18,16 +18,16 @@ block content
                                 use(xlink:href='/img/icons.svg#icon-calendar')
                             span= obj.startDates[0].toLocaleString('en-us', {'month' : 'long', 'year':'numeric'})
                         .booked__data
+                            p.card__ratings
+                                span.card__footer-value= obj.ratingsAverage
+                                |
+                                span.card__footer-text= ` rating (${obj.ratingsQuantity})`
+                        .booked__data
                             p
                             span.booked__data-price &#8377;
                             span.booked__data-price= `${obj.price}`
                             |
                             span.booked__data-text
-                        .booked__data
-                            p.card__ratings
-                                span.card__footer-value= obj.ratingsAverage
-                                |
-                                span.card__footer-text= `rating (${obj.ratingsQuantity})`
                     .line-v &nbsp;
                     .line-h &nbsp;
                     .booked__footer
