@@ -1,6 +1,7 @@
 const Tour = require('./../dev-data/models/tourModel');
 const Booking = require('./../dev-data/models/bookingModel');
 const User = require('./../dev-data/models/userModel');
+const Review = require('./../dev-data/models/reviewModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/AppError');
 
@@ -61,7 +62,7 @@ exports.getSignupForm = (req, res, next) => {
 };
 
 exports.getAccount = (req, res, next) => {
-  res.status(200).render('account', {
+  res.status(200).render('accountInfo', {
     title: 'Your account',
   });
 };
@@ -76,6 +77,16 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   res.status(200).render('booked', {
     title: 'My Tours',
     tours,
+  });
+});
+
+exports.getMyReviews = catchAsync(async (req, res, next) => {
+  //1) Find all bookings
+  const reviews = await Review.find({ user: req.user.id });
+
+  res.status(200).render('reviews', {
+    title: 'My Reviews',
+    reviews,
   });
 });
 

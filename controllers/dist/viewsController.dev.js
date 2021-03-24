@@ -6,6 +6,8 @@ var Booking = require('./../dev-data/models/bookingModel');
 
 var User = require('./../dev-data/models/userModel');
 
+var Review = require('./../dev-data/models/reviewModel');
+
 var catchAsync = require('./../utils/catchAsync');
 
 var AppError = require('./../utils/AppError');
@@ -108,7 +110,7 @@ exports.getSignupForm = function (req, res, next) {
 };
 
 exports.getAccount = function (req, res, next) {
-  res.status(200).render('account', {
+  res.status(200).render('accountInfo', {
     title: 'Your account'
   });
 };
@@ -151,13 +153,38 @@ exports.getMyTours = catchAsync(function _callee4(req, res, next) {
     }
   });
 });
-exports.updateUserData = catchAsync(function _callee5(req, res, next) {
-  var updatedUser;
+exports.getMyReviews = catchAsync(function _callee5(req, res, next) {
+  var reviews;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.next = 2;
+          return regeneratorRuntime.awrap(Review.find({
+            user: req.user.id
+          }));
+
+        case 2:
+          reviews = _context5.sent;
+          res.status(200).render('reviews', {
+            title: 'My Reviews',
+            reviews: reviews
+          });
+
+        case 4:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
+});
+exports.updateUserData = catchAsync(function _callee6(req, res, next) {
+  var updatedUser;
+  return regeneratorRuntime.async(function _callee6$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
           return regeneratorRuntime.awrap(User.findByIdAndUpdate(req.user.id, {
             name: req.body.name,
             email: req.body.email
@@ -167,7 +194,7 @@ exports.updateUserData = catchAsync(function _callee5(req, res, next) {
           }));
 
         case 2:
-          updatedUser = _context5.sent;
+          updatedUser = _context6.sent;
           res.status(200).render('account', {
             title: 'Your account',
             user: updatedUser
@@ -175,7 +202,7 @@ exports.updateUserData = catchAsync(function _callee5(req, res, next) {
 
         case 4:
         case "end":
-          return _context5.stop();
+          return _context6.stop();
       }
     }
   });

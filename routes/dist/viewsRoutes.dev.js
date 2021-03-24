@@ -1,8 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const viewsController = require('./../controllers/viewsController');
-const auth = require('./../controllers/authController');
-//const bookingController = require('./../controllers/bookingController');
+"use strict";
+
+var express = require('express');
+
+var router = express.Router();
+
+var viewsController = require('./../controllers/viewsController');
+
+var auth = require('./../controllers/authController'); //const bookingController = require('./../controllers/bookingController');
+
 
 router.use(viewsController.alerts);
 router.get('/', viewsController.getLanding);

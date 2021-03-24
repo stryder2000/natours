@@ -754,6 +754,10 @@ body {
   position: relative;
 }
 
+.no-review {
+  text-align: center;
+}
+
 .reviews__card--active {
   background-color: #dff8e8 !important;
 }
@@ -955,6 +959,11 @@ body {
 }
 
 .user-view__content {
+  display: block;
+  width: 100%;
+}
+
+.user-view__account {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -968,7 +977,7 @@ body {
 }
 
 @media only screen and (max-width: 62.5em) {
-  .user-view__content {
+  .user-view__account {
     padding: 3rem 0;
   }
 
@@ -1629,7 +1638,7 @@ body {
   width: 9rem;
   border-radius: 50%;
   margin-right: 2rem;
-  font-size: 0.1rem;
+  font-size: 0;
 }
 .form__user-photo:before {
   content: ' ';
