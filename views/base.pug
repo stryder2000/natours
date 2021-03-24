@@ -12,15 +12,15 @@ html
         // HEADER
         include _header
         //- Note that we put an underscore before the file name of all those pug files that are meant to be included in other files
-            
+
         //CONTENT
         block content
             h1 This is the placeholder heading
-        //- Note that block is just the reverse of include in pug. We use block so that some other pug file extends the base file and overwrite the content block. 
-        
+        //- Note that block is just the reverse of include in pug. We use block so that some other pug file extends the base file and overwrite the content block.
+
         //FOOTER
         include _footer
-        
+
         script(src='https://js.stripe.com/v3/')
         script(src='/js/bundle.js')
 //-        script(src='/js/mapbox.js')

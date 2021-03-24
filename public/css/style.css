@@ -170,10 +170,10 @@ body {
     linear,
     left top,
     right top,
-    from(#ff7730),
-    to(#eb4d4b)
+    from(#f58345),
+    to(#bb3835)
   );
-  background-image: linear-gradient(to right, #ff7730, #eb4d4b);
+  background-image: linear-gradient(to right, #f58345, #bb3835);
 }
 
 .heading-secondary--error {
@@ -1892,6 +1892,13 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s;
+}
+
+@media only screen and (max-width: 38.75em) {
+  .deleteAccount {
+    font-size: 1.5rem;
+    padding: 0.7rem 1.2rem;
+  }
 }
 
 .deleteAccount:hover {
