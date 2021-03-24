@@ -18,10 +18,10 @@ router.use(auth.protect);
 
 router.patch('/updatePassword', auth.updatePassword);
 router.patch(
-    '/updateMe',
-    handlers.uploadUserPhoto,
-    handlers.resizeUserPhoto,
-    handlers.updateMe
+  '/updateMe',
+  handlers.uploadUserPhoto,
+  handlers.resizeUserPhoto,
+  handlers.updateMe
 );
 //upload.single('field-name')
 //field name is the name of the field in the form from which to extract the file.
@@ -29,17 +29,14 @@ router.delete('/deleteMe', handlers.deleteMe);
 router.route('/me').get(handlers.getMe, handlers.getUser);
 
 //Restrict access to admin after this middleware
-router.use(auth.restrictTo('admin'));
+router.use(auth.restrictTo('admin', 'user'));
+
+router.route('/').get(handlers.getAllUsers).post(handlers.createNewUser);
 
 router
-    .route('/')
-    .get(handlers.getAllUsers)
-    .post(handlers.createNewUser);
-
-router
-    .route('/:id')
-    .get(handlers.getUser)
-    .patch(handlers.updateUser)
-    .delete(handlers.deleteUser);
+  .route('/:id')
+  .get(handlers.getUser)
+  .patch(handlers.updateUser)
+  .delete(handlers.deleteUser);
 
 module.exports = router;

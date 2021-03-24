@@ -7133,32 +7133,32 @@ parcelRequire = function (e, r, t, n) {
       value: !0
     }), exports.passwordReset = exports.forgotPassword = exports.signup = exports.logout = exports.login = void 0;
 
-    var e = r(require('axios')),
-        t = require('./alerts');
+    var e = t(require('axios')),
+        r = require('./alerts');
 
-    function r(e) {
+    function t(e) {
       return e && e.__esModule ? e : {
         "default": e
       };
     }
 
-    function s(e, t, r, s, n, a, o) {
+    function s(e, r, t, s, n, a, o) {
       try {
         var u = e[a](o),
             c = u.value;
       } catch (i) {
-        return void r(i);
+        return void t(i);
       }
 
-      u.done ? t(c) : Promise.resolve(c).then(s, n);
+      u.done ? r(c) : Promise.resolve(c).then(s, n);
     }
 
     function n(e) {
       return function () {
-        var t = this,
-            r = arguments;
+        var r = this,
+            t = arguments;
         return new Promise(function (n, a) {
-          var o = e.apply(t, r);
+          var o = e.apply(r, t);
 
           function u(e) {
             s(o, n, a, u, c, 'next', e);
@@ -7174,12 +7174,12 @@ parcelRequire = function (e, r, t, n) {
     }
 
     var a = function () {
-      var r = n(regeneratorRuntime.mark(function r(s, n) {
-        return regeneratorRuntime.wrap(function (r) {
+      var t = n(regeneratorRuntime.mark(function t(s, n) {
+        return regeneratorRuntime.wrap(function (t) {
           for (;;) {
-            switch (r.prev = r.next) {
+            switch (t.prev = t.next) {
               case 0:
-                return r.prev = 0, r.next = 3, (0, e["default"])({
+                return t.prev = 0, t.next = 3, (0, e["default"])({
                   method: 'POST',
                   url: '/api/v1/users/login',
                   data: {
@@ -7189,68 +7189,68 @@ parcelRequire = function (e, r, t, n) {
                 });
 
               case 3:
-                'success' === r.sent.data.status && ((0, t.showAlert)('success', 'Logged In successfully!'), window.setTimeout(function () {
+                'success' === t.sent.data.status && ((0, r.showAlert)('success', 'Logged In successfully!'), window.setTimeout(function () {
                   location.assign('/overview');
-                }, 1500)), r.next = 10;
+                }, 1500)), t.next = 10;
                 break;
 
               case 7:
-                r.prev = 7, r.t0 = r["catch"](0), (0, t.showAlert)('error', r.t0.response.data.message);
+                t.prev = 7, t.t0 = t["catch"](0), (0, r.showAlert)('error', t.t0.response.data.message);
 
               case 10:
               case 'end':
-                return r.stop();
+                return t.stop();
             }
           }
-        }, r, null, [[0, 7]]);
+        }, t, null, [[0, 7]]);
       }));
-      return function (e, t) {
-        return r.apply(this, arguments);
+      return function (e, r) {
+        return t.apply(this, arguments);
       };
     }();
 
     exports.login = a;
 
     var o = function () {
-      var r = n(regeneratorRuntime.mark(function r() {
-        return regeneratorRuntime.wrap(function (r) {
+      var t = n(regeneratorRuntime.mark(function t() {
+        return regeneratorRuntime.wrap(function (t) {
           for (;;) {
-            switch (r.prev = r.next) {
+            switch (t.prev = t.next) {
               case 0:
-                return r.prev = 0, r.next = 3, (0, e["default"])({
+                return t.prev = 0, t.next = 3, (0, e["default"])({
                   method: 'GET',
                   url: '/api/v1/users/logout'
                 });
 
               case 3:
-                'success' == r.sent.data.status && location.assign('/login'), r.next = 10;
+                'success' == t.sent.data.status && location.assign('/login'), t.next = 10;
                 break;
 
               case 7:
-                r.prev = 7, r.t0 = r["catch"](0), (0, t.showAlert)('error', 'Error Logging Out! Please try again later.');
+                t.prev = 7, t.t0 = t["catch"](0), (0, r.showAlert)('error', 'Error Logging Out! Please try again later.');
 
               case 10:
               case 'end':
-                return r.stop();
+                return t.stop();
             }
           }
-        }, r, null, [[0, 7]]);
+        }, t, null, [[0, 7]]);
       }));
       return function () {
-        return r.apply(this, arguments);
+        return t.apply(this, arguments);
       };
     }();
 
     exports.logout = o;
 
     var u = function () {
-      var r = n(regeneratorRuntime.mark(function r(s) {
+      var t = n(regeneratorRuntime.mark(function t(s) {
         var n, a, o, u;
-        return regeneratorRuntime.wrap(function (r) {
+        return regeneratorRuntime.wrap(function (t) {
           for (;;) {
-            switch (r.prev = r.next) {
+            switch (t.prev = t.next) {
               case 0:
-                return r.prev = 0, n = s.get('name'), a = s.get('email'), o = s.get('password'), u = s.get('confirmPassword'), r.next = 7, (0, e["default"])({
+                return t.prev = 0, n = s.get('name'), a = s.get('email'), o = s.get('password'), u = s.get('confirmPassword'), t.next = 7, (0, e["default"])({
                   method: 'POST',
                   url: '/api/v1/users/signup',
                   data: {
@@ -7262,36 +7262,36 @@ parcelRequire = function (e, r, t, n) {
                 });
 
               case 7:
-                'success' === r.sent.data.status && ((0, t.showAlert)('success', 'Hello '.concat(n.split(' ')[0].toUpperCase(), ', Welcome to Natours Famiy!')), window.setTimeout(function () {
+                'success' === t.sent.data.status && ((0, r.showAlert)('success', 'Hello '.concat(n.split(' ')[0].toUpperCase(), ', Welcome to Natours Famiy!')), window.setTimeout(function () {
                   location.assign('/overview');
-                }, 1500)), r.next = 14;
+                }, 1500)), t.next = 14;
                 break;
 
               case 11:
-                r.prev = 11, r.t0 = r["catch"](0), (0, t.showAlert)('error', r.t0.response.data.message);
+                t.prev = 11, t.t0 = t["catch"](0), (0, r.showAlert)('error', t.t0.response.data.message);
 
               case 14:
               case 'end':
-                return r.stop();
+                return t.stop();
             }
           }
-        }, r, null, [[0, 11]]);
+        }, t, null, [[0, 11]]);
       }));
       return function (e) {
-        return r.apply(this, arguments);
+        return t.apply(this, arguments);
       };
     }();
 
     exports.signup = u;
 
     var c = function () {
-      var r = n(regeneratorRuntime.mark(function r(s) {
-        var n, a;
-        return regeneratorRuntime.wrap(function (r) {
+      var t = n(regeneratorRuntime.mark(function t(s) {
+        var n;
+        return regeneratorRuntime.wrap(function (t) {
           for (;;) {
-            switch (r.prev = r.next) {
+            switch (t.prev = t.next) {
               case 0:
-                return r.prev = 0, r.next = 3, (0, e["default"])({
+                return t.prev = 0, t.next = 3, (0, e["default"])({
                   method: 'POST',
                   url: '/api/v1/users/forgotPassword',
                   data: {
@@ -7300,36 +7300,34 @@ parcelRequire = function (e, r, t, n) {
                 });
 
               case 3:
-                'success' === (n = r.sent).data.status && ((0, t.showAlert)('success', n.data.message), a = n.data.resetURL.split('resetPassword/')[1], window.setTimeout(function () {
-                  location.assign('/password-reset/'.concat(a));
-                }, 1500)), r.next = 10;
+                'success' === (n = t.sent).data.status && ((0, r.showAlert)('success', n.data.message), n.data.resetURL.split('resetPassword/')[1]), t.next = 10;
                 break;
 
               case 7:
-                r.prev = 7, r.t0 = r["catch"](0), (0, t.showAlert)('error', r.t0.response.data.message);
+                t.prev = 7, t.t0 = t["catch"](0), (0, r.showAlert)('error', t.t0.response.data.message);
 
               case 10:
               case 'end':
-                return r.stop();
+                return t.stop();
             }
           }
-        }, r, null, [[0, 7]]);
+        }, t, null, [[0, 7]]);
       }));
       return function (e) {
-        return r.apply(this, arguments);
+        return t.apply(this, arguments);
       };
     }();
 
     exports.forgotPassword = c;
 
     var i = function () {
-      var r = n(regeneratorRuntime.mark(function r(s, n) {
+      var t = n(regeneratorRuntime.mark(function t(s, n) {
         var a;
-        return regeneratorRuntime.wrap(function (r) {
+        return regeneratorRuntime.wrap(function (t) {
           for (;;) {
-            switch (r.prev = r.next) {
+            switch (t.prev = t.next) {
               case 0:
-                return r.prev = 0, a = document.querySelector('body').dataset.token, console.log(a), r.next = 5, (0, e["default"])({
+                return t.prev = 0, a = document.querySelector('body').dataset.token, t.next = 4, (0, e["default"])({
                   method: 'PATCH',
                   url: '/api/v1/users/resetPassword/'.concat(a),
                   data: {
@@ -7338,24 +7336,24 @@ parcelRequire = function (e, r, t, n) {
                   }
                 });
 
-              case 5:
-                'success' === r.sent.data.status && ((0, t.showAlert)('success', 'Password Reset Successful!'), window.setTimeout(function () {
+              case 4:
+                'success' === t.sent.data.status && ((0, r.showAlert)('success', 'Password Reset Successful!'), window.setTimeout(function () {
                   location.assign('/login');
-                }, 1500)), r.next = 12;
+                }, 1500)), t.next = 11;
                 break;
 
-              case 9:
-                r.prev = 9, r.t0 = r["catch"](0), (0, t.showAlert)('error', r.t0.response.data.message);
+              case 8:
+                t.prev = 8, t.t0 = t["catch"](0), (0, r.showAlert)('error', t.t0.response.data.message);
 
-              case 12:
+              case 11:
               case 'end':
-                return r.stop();
+                return t.stop();
             }
           }
-        }, r, null, [[0, 9]]);
+        }, t, null, [[0, 8]]);
       }));
-      return function (e, t) {
-        return r.apply(this, arguments);
+      return function (e, r) {
+        return t.apply(this, arguments);
       };
     }();
 
@@ -7369,7 +7367,7 @@ parcelRequire = function (e, r, t, n) {
 
     Object.defineProperty(exports, '__esModule', {
       value: !0
-    }), exports.updateUserSettings = void 0;
+    }), exports.deleteAccount = exports.updateUserSettings = void 0;
 
     var e = r(require('axios')),
         t = require('./alerts');
@@ -7380,15 +7378,15 @@ parcelRequire = function (e, r, t, n) {
       };
     }
 
-    function n(e, t, r, n, s, a, u) {
+    function n(e, t, r, n, s, a, o) {
       try {
-        var o = e[a](u),
-            i = o.value;
-      } catch (c) {
-        return void r(c);
+        var u = e[a](o),
+            c = u.value;
+      } catch (i) {
+        return void r(i);
       }
 
-      o.done ? t(i) : Promise.resolve(i).then(n, s);
+      u.done ? t(c) : Promise.resolve(c).then(n, s);
     }
 
     function s(e) {
@@ -7396,17 +7394,17 @@ parcelRequire = function (e, r, t, n) {
         var t = this,
             r = arguments;
         return new Promise(function (s, a) {
-          var u = e.apply(t, r);
+          var o = e.apply(t, r);
 
-          function o(e) {
-            n(u, s, a, o, i, 'next', e);
+          function u(e) {
+            n(o, s, a, u, c, 'next', e);
           }
 
-          function i(e) {
-            n(u, s, a, o, i, 'throw', e);
+          function c(e) {
+            n(o, s, a, u, c, 'throw', e);
           }
 
-          o(void 0);
+          u(void 0);
         });
       };
     }
@@ -7446,6 +7444,40 @@ parcelRequire = function (e, r, t, n) {
     }();
 
     exports.updateUserSettings = a;
+
+    var o = function () {
+      var r = s(regeneratorRuntime.mark(function r() {
+        return regeneratorRuntime.wrap(function (r) {
+          for (;;) {
+            switch (r.prev = r.next) {
+              case 0:
+                return r.prev = 0, '/api/v1/users/deleteMe/', r.next = 4, (0, e["default"])({
+                  method: 'DELETE',
+                  url: '/api/v1/users/deleteMe/'
+                });
+
+              case 4:
+                204 === r.sent.status && ((0, t.showAlert)('success', 'Your Natours Account has been deleted Permanently! We hope to see you back soon.😊'), window.setTimeout(function () {
+                  location.assign('/');
+                }, 3e3)), r.next = 11;
+                break;
+
+              case 8:
+                r.prev = 8, r.t0 = r["catch"](0), (0, t.showAlert)('error', r.t0.response.data.message);
+
+              case 11:
+              case 'end':
+                return r.stop();
+            }
+          }
+        }, r, null, [[0, 8]]);
+      }));
+      return function () {
+        return r.apply(this, arguments);
+      };
+    }();
+
+    exports.deleteAccount = o;
   }, {
     axios: 'uj17',
     './alerts': 'odIX'
@@ -7541,7 +7573,7 @@ parcelRequire = function (e, r, t, n) {
 
     Object.defineProperty(exports, '__esModule', {
       value: !0
-    }), exports.addReview = void 0;
+    }), exports.deleteReview = exports.addReview = void 0;
 
     var e = t(require('axios')),
         r = require('./alerts');
@@ -7552,15 +7584,15 @@ parcelRequire = function (e, r, t, n) {
       };
     }
 
-    function n(e, r, t, n, o, a, u) {
+    function n(e, r, t, n, o, a, s) {
       try {
-        var s = e[a](u),
-            i = s.value;
+        var u = e[a](s),
+            i = u.value;
       } catch (c) {
         return void t(c);
       }
 
-      s.done ? r(i) : Promise.resolve(i).then(n, o);
+      u.done ? r(i) : Promise.resolve(i).then(n, o);
     }
 
     function o(e) {
@@ -7568,17 +7600,17 @@ parcelRequire = function (e, r, t, n) {
         var r = this,
             t = arguments;
         return new Promise(function (o, a) {
-          var u = e.apply(r, t);
+          var s = e.apply(r, t);
 
-          function s(e) {
-            n(u, o, a, s, i, 'next', e);
+          function u(e) {
+            n(s, o, a, u, i, 'next', e);
           }
 
           function i(e) {
-            n(u, o, a, s, i, 'throw', e);
+            n(s, o, a, u, i, 'throw', e);
           }
 
-          s(void 0);
+          u(void 0);
         });
       };
     }
@@ -7617,6 +7649,41 @@ parcelRequire = function (e, r, t, n) {
     }();
 
     exports.addReview = a;
+
+    var s = function () {
+      var t = o(regeneratorRuntime.mark(function t(n) {
+        var o;
+        return regeneratorRuntime.wrap(function (t) {
+          for (;;) {
+            switch (t.prev = t.next) {
+              case 0:
+                return t.prev = 0, o = '/api/v1/reviews/' + n, t.next = 4, (0, e["default"])({
+                  method: 'DELETE',
+                  url: o
+                });
+
+              case 4:
+                204 === t.sent.status && ((0, r.showAlert)('success', 'Comment deleted Successfully!'), window.setTimeout(function () {
+                  location.reload();
+                }, 1e3)), t.next = 11;
+                break;
+
+              case 8:
+                t.prev = 8, t.t0 = t["catch"](0), (0, r.showAlert)('error', t.t0.response.data.message);
+
+              case 11:
+              case 'end':
+                return t.stop();
+            }
+          }
+        }, t, null, [[0, 8]]);
+      }));
+      return function (e) {
+        return t.apply(this, arguments);
+      };
+    }();
+
+    exports.deleteReview = s;
   }, {
     axios: 'uj17',
     './alerts': 'odIX'
@@ -7673,11 +7740,13 @@ parcelRequire = function (e, r, t, n) {
         q = document.querySelector('.form-user-data'),
         p = document.querySelector('.form-user-password'),
         g = document.getElementById('book-tour'),
-        y = document.querySelector('.review-btn');
+        y = document.querySelector('.review-btn'),
+        f = document.querySelector('.deleteBtn'),
+        v = document.querySelector('.deleteAccount');
 
     if (d) {
-      var f = JSON.parse(d.dataset.locations);
-      (0, e.displayMap)(f);
+      var b = JSON.parse(d.dataset.locations);
+      (0, e.displayMap)(b);
     }
 
     c && c.addEventListener('submit', function (e) {
@@ -7693,7 +7762,7 @@ parcelRequire = function (e, r, t, n) {
       e.preventDefault();
       var s = document.getElementById('password').value,
           o = document.getElementById('confirm-password').value;
-      console.log(s, o), (0, r.passwordReset)(s, o);
+      (0, r.passwordReset)(s, o);
     }), a && a.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = new FormData();
@@ -7746,9 +7815,15 @@ parcelRequire = function (e, r, t, n) {
         };
         (0, u.addReview)(t);
       }
+    }), f && f.addEventListener('click', function (e) {
+      e.preventDefault();
+      var r = e.target.dataset.review;
+      (0, u.deleteReview)(r);
+    }), v && v.addEventListener('click', function (e) {
+      e.preventDefault(), (0, s.deleteAccount)();
     });
-    var v = document.querySelector('body').dataset.alert;
-    v && (0, t.showAlert)('success', v, 20);
+    var w = document.querySelector('body').dataset.alert;
+    w && (0, t.showAlert)('success', w, 7);
   }, {
     'core-js/modules/es6.array.copy-within': 'c9DC',
     'core-js/modules/es6.array.fill': 'ZBH0',

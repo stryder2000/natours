@@ -77,9 +77,9 @@ export const forgotPassword = async (email) => {
     if (res.data.status === 'success') {
       showAlert('success', res.data.message);
       const token = res.data.resetURL.split('resetPassword/')[1];
-      window.setTimeout(() => {
-        location.assign(`/password-reset/${token}`);
-      }, 1500);
+      // window.setTimeout(() => {
+      //   location.assign(`/password-reset/${token}`);
+      // }, 1500);
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
@@ -89,7 +89,6 @@ export const forgotPassword = async (email) => {
 export const passwordReset = async (password, confirmPassword) => {
   try {
     const token = document.querySelector('body').dataset.token;
-    console.log(token);
     const res = await axios({
       method: 'PATCH',
       url: `/api/v1/users/resetPassword/${token}`,

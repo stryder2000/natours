@@ -83,7 +83,6 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 exports.getMyReviews = catchAsync(async (req, res, next) => {
   //1) Find all bookings
   const reviews = await Review.find({ user: req.user.id });
-
   res.status(200).render('reviews', {
     title: 'My Reviews',
     reviews,

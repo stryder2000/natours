@@ -24,3 +24,26 @@ export const updateUserSettings = async (data, type) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const deleteAccount = async () => {
+  try {
+    const url = '/api/v1/users/deleteMe/';
+    const res = await axios({
+      method: 'DELETE',
+      url,
+    });
+
+    if (res.status === 204) {
+      showAlert(
+        'success',
+        `Your Natours Account has been deleted Permanently! We hope to see you back soon.😊`
+      );
+
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 3000);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};

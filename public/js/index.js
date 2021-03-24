@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import { displayMap } from './mapbox';
 import { login, logout, signup, passwordReset, forgotPassword } from './login';
-import { updateUserSettings } from './updateSettings';
+import { updateUserSettings, deleteAccount } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { addReview, deleteReview } from './reviews';
@@ -18,6 +18,7 @@ const updateUserPassword = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const reviewBtn = document.querySelector('.review-btn');
 const deleteReviewBtn = document.querySelector('.deleteBtn');
+const deleteAccountBtn = document.querySelector('.deleteAccount');
 
 //DELEGATION
 if (mapBox) {
@@ -49,7 +50,6 @@ if (passwordResetForm) {
 
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
-    console.log(password, confirmPassword);
     passwordReset(password, confirmPassword);
   });
 }
@@ -149,6 +149,13 @@ if (deleteReviewBtn) {
     e.preventDefault();
     const { review } = e.target.dataset;
     deleteReview(review);
+  });
+}
+
+if (deleteAccountBtn) {
+  deleteAccountBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    deleteAccount();
   });
 }
 

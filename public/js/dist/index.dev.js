@@ -25,7 +25,8 @@ var updateUserForm = document.querySelector('.form-user-data');
 var updateUserPassword = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
 var reviewBtn = document.querySelector('.review-btn');
-var deleteReviewBtn = document.querySelector('.deleteBtn'); //DELEGATION
+var deleteReviewBtn = document.querySelector('.deleteBtn');
+var deleteAccountBtn = document.querySelector('.deleteAccount'); //DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -54,7 +55,6 @@ if (passwordResetForm) {
     e.preventDefault();
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirm-password').value;
-    console.log(password, confirmPassword);
     (0, _login.passwordReset)(password, confirmPassword);
   });
 }
@@ -164,6 +164,13 @@ if (deleteReviewBtn) {
     e.preventDefault();
     var review = e.target.dataset.review;
     (0, _reviews.deleteReview)(review);
+  });
+}
+
+if (deleteAccountBtn) {
+  deleteAccountBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    (0, _updateSettings.deleteAccount)();
   });
 }
 
