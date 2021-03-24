@@ -168,4 +168,4 @@ if (deleteReviewBtn) {
 }
 
 var alertMessage = document.querySelector('body').dataset.alert;
-if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 20);
+if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 7);
