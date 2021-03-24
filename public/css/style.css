@@ -469,8 +469,9 @@ body {
     height: 50vw;
   }
 
-  .heading-primary {
-    font-size: 4.5rem;
+  .heading-box {
+    width: 100%;
+    margin-left: 10%;
   }
 }
 /* 824px */
@@ -482,6 +483,7 @@ body {
     left: 28%;
   }
   .heading-primary {
+    font-size: 4.5rem;
     text-align: left;
   }
 }
@@ -490,8 +492,13 @@ body {
   .heading-primary {
     font-size: 3rem;
   }
+
+  .heading-box__group {
+    margin-top: 1rem;
+  }
+
   .heading-box__detail {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 
