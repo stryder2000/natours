@@ -746,7 +746,7 @@ body {
 }
 
 .reviews__card--active {
-  background-color: #c8fcd9 !important;
+  background-color: #dff8e8 !important;
 }
 
 .reviews:before,
@@ -1804,12 +1804,11 @@ body {
   border-radius: 7px;
   font-weight: 550;
   cursor: pointer;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
 }
 
 .deleteBtn:hover {
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  background-color: #ff5e5e;
+  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
 
