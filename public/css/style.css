@@ -471,10 +471,10 @@ body {
     font-size: 4.5rem;
   }
 }
-
+/* 824px */
 @media only screen and (max-width: 51.5em) {
   .section-header {
-    height: 64vw;
+    height: 70vw;
   }
   .heading-box {
     left: 28%;
