@@ -9,7 +9,8 @@ block accountInfo
             .reviews__card
               div
                 h6.reviews__user= review.tour.name
-
+                if showUserName == true
+                  h6.reviews__username= review.user ? `( ${review.user.name} )` : ''
               p.reviews__text= review.review
               .reviews__rating
                 for star in [1, 2, 3, 4, 5]
@@ -17,4 +18,4 @@ block accountInfo
                       use(xlink:href='/img/icons.svg#icon-star')
               h3.reviews__date= `~${review.createdAt.toLocaleString().split(',')[0]}`
 
-              div.deleteBtn(data-review=`${review.id}`) Delete
+              div.deleteReviewBtn(data-review=`${review.id}`) Delete

@@ -15,7 +15,6 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getLanding = catchAsync(async (req, res, next) => {
-  console.log('this');
   res.status(200).render('landing', {
     title: 'Exciting tours for adventurous people',
   });
@@ -83,12 +82,52 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getAllTours = catchAsync(async (req, res, next) => {
+  //1) Find all tours
+  const tours = await Tour.find();
+
+  res.status(200).render('tours', {
+    title: 'All Tours',
+    tours,
+  });
+});
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  //1) Find all users
+  const users = await User.find();
+  res.status(200).render('users', {
+    title: 'Manage Users',
+    users,
+  });
+});
+
 exports.getMyReviews = catchAsync(async (req, res, next) => {
   //1) Find all bookings
   const reviews = await Review.find({ user: req.user.id });
   res.status(200).render('reviews', {
     title: 'My Reviews',
     reviews,
+  });
+});
+
+exports.getAllReviews = catchAsync(async (req, res, next) => {
+  //1) Find all bookings
+  const reviews = await Review.find();
+  const showUserName = true;
+  res.status(200).render('reviews', {
+    title: 'Manage Reviews',
+    reviews,
+    showUserName,
+  });
+});
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  //1) Find all bookings
+  const users = await User.find();
+
+  res.status(200).render('users', {
+    title: 'Manage Users',
+    users,
   });
 });
 

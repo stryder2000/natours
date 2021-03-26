@@ -1,0 +1,42 @@
+extends account
+
+block accountInfo
+    main.main
+        .booked-container
+            if tours.length == 0
+                h1 No Tours Found
+            else
+                each obj in tours
+                    .booked.manage-tours
+                        h4.booked__heading= obj.name
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__details
+                            .booked__data
+                                svg.card__icon
+                                    use(xlink:href='/img/icons.svg#icon-map-pin')
+                                span= obj.startLocation.description
+                            .booked__data
+                                svg.card__icon
+                                    use(xlink:href='/img/icons.svg#icon-calendar')
+                                span= obj.startDates[0].toLocaleString('en-us', {'month' : 'long', 'year':'numeric'})
+                            .booked__data
+                                p.card__ratings
+                                    span.card__footer-value= obj.ratingsAverage
+                                    |
+                                    span.card__footer-text= ` rating (${obj.ratingsQuantity})`
+                            .booked__data
+                                p
+                                span.booked__data-price &#8377;
+                                span.booked__data-price= `${obj.price}`
+                                |
+                                span.booked__data-text
+                        .line-v &nbsp;
+                        .line-h &nbsp;
+                        .booked__footer
+                            a.btn.btn--green.btn--small(href=`/tour/${obj.slug}`)
+                                svg.delete-icon
+                                    use(xlink:href=`img/icons.svg#icon-info`)
+                            div.deleteTourBtn(data-tourId=`${obj.id}`)
+                                svg.delete-icon
+                                    use(xlink:href=`img/icons.svg#icon-delete`)

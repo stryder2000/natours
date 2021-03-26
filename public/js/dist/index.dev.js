@@ -14,6 +14,12 @@ var _alerts = require("./alerts");
 
 var _reviews = require("./reviews");
 
+var _tour = require("./tour");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 //DOM ELEMENTS
 var mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
@@ -25,9 +31,10 @@ var updateUserForm = document.querySelector('.form-user-data');
 var updateUserPassword = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
 var reviewBtn = document.querySelector('.review-btn');
-var deleteReviewBtn = document.querySelector('.deleteBtn');
+var deleteReviewBtn = document.querySelector('.deleteReviewBtn');
 var deleteAccountBtn = document.querySelector('.deleteAccount');
-var landingLogin = document.querySelector('.landingform--login'); //DELEGATION
+var landingLogin = document.querySelector('.landingform--login');
+var deleteTourBtn = document.getElementById('.deleteTourBtn'); //DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -164,6 +171,7 @@ if (deleteReviewBtn) {
   deleteReviewBtn.addEventListener('click', function (e) {
     e.preventDefault();
     var review = e.target.dataset.review;
+    console.log(review);
     (0, _reviews.deleteReview)(review);
   });
 }
@@ -185,5 +193,31 @@ if (landingLogin) {
   });
 }
 
+if (deleteTourBtn) {
+  deleteAccountBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var tourId = e.target.dataset;
+    console.log(tourId); //deleteTour(tourId);
+  });
+}
+
 var alertMessage = document.querySelector('body').dataset.alert;
-if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 7);
+if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 7); // window.deleteReview = async (reviewId) => {
+//   try {
+//     const url = '/api/v1/reviews/' + reviewId;
+//     console.log('we are herer');
+//     console.log('this');
+//     const res = await axios({
+//       method: 'DELETE',
+//       url,
+//     });
+//     if (res.status === 204) {
+//       showAlert('success', `Comment deleted Successfully!`);
+//       window.setTimeout(() => {
+//         location.reload();
+//       }, 1000);
+//     }
+//   } catch (err) {
+//     showAlert('error', err.response.data.message);
+//   }
+// };

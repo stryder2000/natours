@@ -5,6 +5,8 @@ import { updateUserSettings, deleteAccount } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { addReview, deleteReview } from './reviews';
+import { deleteTour } from './tour';
+import axios from 'axios';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -17,9 +19,10 @@ const updateUserForm = document.querySelector('.form-user-data');
 const updateUserPassword = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const reviewBtn = document.querySelector('.review-btn');
-const deleteReviewBtn = document.querySelector('.deleteBtn');
+const deleteReviewBtn = document.querySelector('.deleteReviewBtn');
 const deleteAccountBtn = document.querySelector('.deleteAccount');
 const landingLogin = document.querySelector('.landingform--login');
+const deleteTourBtn = document.getElementById('.deleteTourBtn');
 
 //DELEGATION
 if (mapBox) {
@@ -149,6 +152,7 @@ if (deleteReviewBtn) {
   deleteReviewBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const { review } = e.target.dataset;
+    console.log(review);
     deleteReview(review);
   });
 }
@@ -170,5 +174,35 @@ if (landingLogin) {
   });
 }
 
+if (deleteTourBtn) {
+  deleteAccountBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const tourId = e.target.dataset;
+    console.log(tourId);
+    //deleteTour(tourId);
+  });
+}
+
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 7);
+
+// window.deleteReview = async (reviewId) => {
+//   try {
+//     const url = '/api/v1/reviews/' + reviewId;
+//     console.log('we are herer');
+//     console.log('this');
+//     const res = await axios({
+//       method: 'DELETE',
+//       url,
+//     });
+//     if (res.status === 204) {
+//       showAlert('success', `Comment deleted Successfully!`);
+
+//       window.setTimeout(() => {
+//         location.reload();
+//       }, 1000);
+//     }
+//   } catch (err) {
+//     showAlert('error', err.response.data.message);
+//   }
+// };
