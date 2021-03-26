@@ -15,7 +15,10 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getLanding = catchAsync(async (req, res, next) => {
-  res.status(200).sendFile(`${__dirname}/../../public/index.html`);
+  console.log('this');
+  res.status(200).render('landing', {
+    title: 'Exciting tours for adventurous people',
+  });
 });
 
 exports.getOverview = catchAsync(async (req, res, next) => {

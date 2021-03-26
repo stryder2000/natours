@@ -26,7 +26,8 @@ var updateUserPassword = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
 var reviewBtn = document.querySelector('.review-btn');
 var deleteReviewBtn = document.querySelector('.deleteBtn');
-var deleteAccountBtn = document.querySelector('.deleteAccount'); //DELEGATION
+var deleteAccountBtn = document.querySelector('.deleteAccount');
+var landingLogin = document.querySelector('.landingform--login'); //DELEGATION
 
 if (mapBox) {
   var locations = JSON.parse(mapBox.dataset.locations);
@@ -171,6 +172,16 @@ if (deleteAccountBtn) {
   deleteAccountBtn.addEventListener('click', function (e) {
     e.preventDefault();
     (0, _updateSettings.deleteAccount)();
+  });
+}
+
+if (landingLogin) {
+  landingLogin.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('landingEmail').value;
+    var password = document.getElementById('landingPassword').value;
+    console.log(email, password);
+    (0, _login.login)(email, password);
   });
 }
 

@@ -23,9 +23,12 @@ exports.getLanding = catchAsync(function _callee(req, res, next) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          res.status(200).sendFile("".concat(__dirname, "/../../public/index.html"));
+          console.log('this');
+          res.status(200).render('landing', {
+            title: 'Exciting tours for adventurous people'
+          });
 
-        case 1:
+        case 2:
         case "end":
           return _context.stop();
       }

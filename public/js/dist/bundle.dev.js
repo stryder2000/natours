@@ -7733,20 +7733,21 @@ parcelRequire = function (e, r, t, n) {
 
     var d = document.getElementById('map'),
         c = document.querySelector('.form--login'),
-        m = document.querySelector('.form--forgotPassword'),
-        l = document.getElementById('resetPassword'),
+        l = document.querySelector('.form--forgotPassword'),
+        m = document.getElementById('resetPassword'),
         a = document.querySelector('.form--signup'),
-        j = document.querySelector('.nav__el--logout'),
-        q = document.querySelector('.form-user-data'),
+        q = document.querySelector('.nav__el--logout'),
+        j = document.querySelector('.form-user-data'),
         p = document.querySelector('.form-user-password'),
         g = document.getElementById('book-tour'),
         y = document.querySelector('.review-btn'),
         f = document.querySelector('.deleteBtn'),
-        v = document.querySelector('.deleteAccount');
+        v = document.querySelector('.deleteAccount'),
+        b = document.querySelector('.landingform--login');
 
     if (d) {
-      var b = JSON.parse(d.dataset.locations);
-      (0, e.displayMap)(b);
+      var w = JSON.parse(d.dataset.locations);
+      (0, e.displayMap)(w);
     }
 
     c && c.addEventListener('submit', function (e) {
@@ -7754,11 +7755,11 @@ parcelRequire = function (e, r, t, n) {
       var s = document.getElementById('email').value,
           o = document.getElementById('password').value;
       (0, r.login)(s, o);
-    }), m && m.addEventListener('submit', function (e) {
+    }), l && l.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = document.getElementById('email').value;
       (0, r.forgotPassword)(s);
-    }), l && l.addEventListener('click', function (e) {
+    }), m && m.addEventListener('click', function (e) {
       e.preventDefault();
       var s = document.getElementById('password').value,
           o = document.getElementById('confirm-password').value;
@@ -7767,7 +7768,7 @@ parcelRequire = function (e, r, t, n) {
       e.preventDefault();
       var s = new FormData();
       s.append('name', document.getElementById('name').value), s.append('email', document.getElementById('email').value), s.append('password', document.getElementById('password').value), s.append('confirmPassword', document.getElementById('confirm-password').value), document.getElementById('signup').textContent = 'Signing up...', (0, r.signup)(s);
-    }), j && j.addEventListener('click', r.logout), q && q.addEventListener('submit', function (e) {
+    }), q && q.addEventListener('click', r.logout), j && j.addEventListener('submit', function (e) {
       e.preventDefault();
       var r = new FormData();
       r.append('name', document.getElementById('name').value), r.append('email', document.getElementById('email').value), r.append('photo', document.getElementById('photo').files[0]), (0, s.updateUserSettings)(r, 'data');
@@ -7821,9 +7822,14 @@ parcelRequire = function (e, r, t, n) {
       (0, u.deleteReview)(r);
     }), v && v.addEventListener('click', function (e) {
       e.preventDefault(), (0, s.deleteAccount)();
+    }), b && b.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var s = document.getElementById('landingEmail').value,
+          o = document.getElementById('landingPassword').value;
+      console.log(s, o), (0, r.login)(s, o);
     });
-    var w = document.querySelector('body').dataset.alert;
-    w && (0, t.showAlert)('success', w, 7);
+    var h = document.querySelector('body').dataset.alert;
+    h && (0, t.showAlert)('success', h, 7);
   }, {
     'core-js/modules/es6.array.copy-within': 'c9DC',
     'core-js/modules/es6.array.fill': 'ZBH0',

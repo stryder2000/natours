@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/style2.css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="./js/bundle.js"></script>
     <script>
       window.closeNav = () => {
         document.getElementById('nav-toggle').checked = false;
@@ -406,9 +408,9 @@
                   />
                   <label for="password" class="form__label">Password</label>
                 </div>
-                <a href="/login" class="btn btn--green">
+                <button href="/login" type="submit" class="btn btn--green">
                   Login &rarr;
-                </a>
+                </button>
               </form>
             </div>
           </div>

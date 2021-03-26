@@ -47,7 +47,7 @@ reviewSchema.pre(/^find/, function (next) {
   next();
 });
 
-reviewSchema.statics.calcAverageRatings = function _callee(tourId) {
+reviewSchema.statics.calculateAvgRatings = function _callee(tourId) {
   var stats;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -104,8 +104,11 @@ reviewSchema.statics.calcAverageRatings = function _callee(tourId) {
 };
 
 reviewSchema.post('save', function () {
-  // this points to current review
-  this.constructor.calcAverageRatings(this.tour);
+  //this point to the current review
+  //this.constructor points to Review Model
+  //Note that we have to use this.constructor here instead of
+  //Review here, as review is defined after definition of this function.
+  this.constructor.calculateAvgRatings(this.tour);
 }); // findByIdAndUpdate
 // findByIdAndDelete
 
@@ -119,7 +122,6 @@ reviewSchema.pre(/^findOneAnd/, function _callee2(next) {
 
         case 2:
           this.r = _context2.sent;
-          // console.log(this.r);
           next();
 
         case 4:
@@ -135,7 +137,7 @@ reviewSchema.post(/^findOneAnd/, function _callee3() {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap(this.r.constructor.calcAverageRatings(this.r.tour));
+          return regeneratorRuntime.awrap(this.r.constructor.calculateAvgRatings(this.r.tour));
 
         case 2:
         case "end":
@@ -144,5 +146,5 @@ reviewSchema.post(/^findOneAnd/, function _callee3() {
     }
   }, null, this);
 });
-var Review = mongoose.model('Review', reviewSchema);
+var Review = new mongoose.model('Review', reviewSchema);
 module.exports = Review;
