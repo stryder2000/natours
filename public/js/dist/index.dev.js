@@ -16,10 +16,6 @@ var _reviews = require("./reviews");
 
 var _tour = require("./tour");
 
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 //DOM ELEMENTS
 var mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
@@ -202,22 +198,4 @@ if (deleteTourBtn) {
 }
 
 var alertMessage = document.querySelector('body').dataset.alert;
-if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 7); // window.deleteReview = async (reviewId) => {
-//   try {
-//     const url = '/api/v1/reviews/' + reviewId;
-//     console.log('we are herer');
-//     console.log('this');
-//     const res = await axios({
-//       method: 'DELETE',
-//       url,
-//     });
-//     if (res.status === 204) {
-//       showAlert('success', `Comment deleted Successfully!`);
-//       window.setTimeout(() => {
-//         location.reload();
-//       }, 1000);
-//     }
-//   } catch (err) {
-//     showAlert('error', err.response.data.message);
-//   }
-// };
+if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 7);

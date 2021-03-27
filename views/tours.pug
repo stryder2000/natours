@@ -34,9 +34,9 @@ block accountInfo
                         .line-v &nbsp;
                         .line-h &nbsp;
                         .booked__footer
-                            a.btn.btn--green.btn--small(href=`/tour/${obj.slug}`)
+                            a.info-icon(href=`/tour/${obj.slug}`)
                                 svg.delete-icon
                                     use(xlink:href=`img/icons.svg#icon-info`)
-                            div.deleteTourBtn(data-tourId=`${obj.id}`)
+                            div.deleteTourBtn(onclick=`deleteTour('${obj.id}')`)
                                 svg.delete-icon
                                     use(xlink:href=`img/icons.svg#icon-delete`)

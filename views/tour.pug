@@ -82,7 +82,7 @@ block content
                       use(xlink:href='/img/icons.svg#icon-star')
               if user
                 if review.user.id == user.id
-                  div.deleteBtn(data-review=`${review.id}`) Delete
+                  div.deleteReviewBtn(data-review=`${review.id}`) Delete
 
       if user
         .add-review.form__group

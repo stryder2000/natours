@@ -6,7 +6,6 @@ import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { addReview, deleteReview } from './reviews';
 import { deleteTour } from './tour';
-import axios from 'axios';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -152,6 +151,7 @@ if (deleteReviewBtn) {
   deleteReviewBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const { review } = e.target.dataset;
+
     console.log(review);
     deleteReview(review);
   });
@@ -185,24 +185,3 @@ if (deleteTourBtn) {
 
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 7);
-
-// window.deleteReview = async (reviewId) => {
-//   try {
-//     const url = '/api/v1/reviews/' + reviewId;
-//     console.log('we are herer');
-//     console.log('this');
-//     const res = await axios({
-//       method: 'DELETE',
-//       url,
-//     });
-//     if (res.status === 204) {
-//       showAlert('success', `Comment deleted Successfully!`);
-
-//       window.setTimeout(() => {
-//         location.reload();
-//       }, 1000);
-//     }
-//   } catch (err) {
-//     showAlert('error', err.response.data.message);
-//   }
-// };

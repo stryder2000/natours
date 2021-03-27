@@ -101,12 +101,6 @@ app.use(function (req, res, next) {
   req.requestTime = new Date().toISOString();
   next();
 }); //app.use(morgan('tiny'));
-//ROUTES
-//app.get('/api/v1/tours', getAllTours);
-//app.get('/api/v1/tours/:id', getTourByID);
-//app.post('/api/v1/tours', createNewTour);
-//app.patch('/api/v1/tours/:id', updateTour);
-//app.delete('/api/v1/tours/:id', deleteTour);
 //Here we refactor our code to improve readability of our code.
 //We group together the HTTP methods that have same URL.
 
@@ -116,10 +110,6 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
 app.all('*', function (req, res, next) {
-  //    const err = new Error(`Can't find ${req.originalUrl} on the server!`);
-  //    err.statusCode = 404;
-  //    err.status = 'fail';
-  //    next(err);
   next(new AppError("Can't find ".concat(req.originalUrl, " on the server!"), 404));
 }); //Global error handling middleware - It handles all the errors
 //that are generated using next() in any of the routes above.

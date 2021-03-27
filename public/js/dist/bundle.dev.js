@@ -7784,16 +7784,9 @@ parcelRequire = function (e, r, t, n) {
         o = require('./stripe'),
         t = require('./alerts'),
         u = require('./reviews'),
-        i = require('./tour'),
-        n = d(require('axios'));
+        i = require('./tour');
 
-    function d(e) {
-      return e && e.__esModule ? e : {
-        "default": e
-      };
-    }
-
-    function c(e, r, s, o, t, u, i) {
+    function n(e, r, s, o, t, u, i) {
       try {
         var n = e[u](i),
             d = n.value;
@@ -7804,7 +7797,7 @@ parcelRequire = function (e, r, t, n) {
       n.done ? r(d) : Promise.resolve(d).then(o, t);
     }
 
-    function l(e) {
+    function d(e) {
       return function () {
         var r = this,
             s = arguments;
@@ -7812,11 +7805,11 @@ parcelRequire = function (e, r, t, n) {
           var u = e.apply(r, s);
 
           function i(e) {
-            c(u, o, t, i, n, 'next', e);
+            n(u, o, t, i, d, 'next', e);
           }
 
-          function n(e) {
-            c(u, o, t, i, n, 'throw', e);
+          function d(e) {
+            n(u, o, t, i, d, 'throw', e);
           }
 
           i(void 0);
@@ -7824,50 +7817,50 @@ parcelRequire = function (e, r, t, n) {
       };
     }
 
-    var m = document.getElementById('map'),
-        a = document.querySelector('.form--login'),
-        q = document.querySelector('.form--forgotPassword'),
-        j = document.getElementById('resetPassword'),
-        p = document.querySelector('.form--signup'),
-        g = document.querySelector('.nav__el--logout'),
-        y = document.querySelector('.form-user-data'),
-        f = document.querySelector('.form-user-password'),
-        v = document.getElementById('book-tour'),
-        b = document.querySelector('.review-btn'),
-        w = document.querySelector('.deleteReviewBtn'),
-        h = document.querySelector('.deleteAccount'),
-        E = document.querySelector('.landingform--login'),
-        B = document.getElementById('.deleteTourBtn');
+    var c = document.getElementById('map'),
+        l = document.querySelector('.form--login'),
+        m = document.querySelector('.form--forgotPassword'),
+        a = document.getElementById('resetPassword'),
+        q = document.querySelector('.form--signup'),
+        j = document.querySelector('.nav__el--logout'),
+        p = document.querySelector('.form-user-data'),
+        g = document.querySelector('.form-user-password'),
+        y = document.getElementById('book-tour'),
+        f = document.querySelector('.review-btn'),
+        v = document.querySelector('.deleteReviewBtn'),
+        b = document.querySelector('.deleteAccount'),
+        w = document.querySelector('.landingform--login'),
+        h = document.getElementById('.deleteTourBtn');
 
-    if (m) {
-      var I = JSON.parse(m.dataset.locations);
-      (0, e.displayMap)(I);
+    if (c) {
+      var E = JSON.parse(c.dataset.locations);
+      (0, e.displayMap)(E);
     }
 
-    a && a.addEventListener('submit', function (e) {
+    l && l.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = document.getElementById('email').value,
           o = document.getElementById('password').value;
       (0, r.login)(s, o);
-    }), q && q.addEventListener('submit', function (e) {
+    }), m && m.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = document.getElementById('email').value;
       (0, r.forgotPassword)(s);
-    }), j && j.addEventListener('click', function (e) {
+    }), a && a.addEventListener('click', function (e) {
       e.preventDefault();
       var s = document.getElementById('password').value,
           o = document.getElementById('confirm-password').value;
       (0, r.passwordReset)(s, o);
-    }), p && p.addEventListener('submit', function (e) {
+    }), q && q.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = new FormData();
       s.append('name', document.getElementById('name').value), s.append('email', document.getElementById('email').value), s.append('password', document.getElementById('password').value), s.append('confirmPassword', document.getElementById('confirm-password').value), document.getElementById('signup').textContent = 'Signing up...', (0, r.signup)(s);
-    }), g && g.addEventListener('click', r.logout), y && y.addEventListener('submit', function (e) {
+    }), j && j.addEventListener('click', r.logout), p && p.addEventListener('submit', function (e) {
       e.preventDefault();
       var r = new FormData();
       r.append('name', document.getElementById('name').value), r.append('email', document.getElementById('email').value), r.append('photo', document.getElementById('photo').files[0]), (0, s.updateUserSettings)(r, 'data');
-    }), f && f.addEventListener('submit', function () {
-      var e = l(regeneratorRuntime.mark(function e(r) {
+    }), g && g.addEventListener('submit', function () {
+      var e = d(regeneratorRuntime.mark(function e(r) {
         var o, t, u;
         return regeneratorRuntime.wrap(function (e) {
           for (;;) {
@@ -7892,11 +7885,11 @@ parcelRequire = function (e, r, t, n) {
       return function (r) {
         return e.apply(this, arguments);
       };
-    }()), v && v.addEventListener('click', function (e) {
+    }()), y && y.addEventListener('click', function (e) {
       e.target.textContent = 'Processing...';
       var r = e.target.dataset.tourId;
       (0, o.bookTour)(r);
-    }), b && b.addEventListener('click', function (e) {
+    }), f && f.addEventListener('click', function (e) {
       e.preventDefault();
       var r = document.querySelector('.review__input').value,
           s = document.getElementById('data-tour').value,
@@ -7910,24 +7903,24 @@ parcelRequire = function (e, r, t, n) {
         };
         (0, u.addReview)(t);
       }
-    }), w && w.addEventListener('click', function (e) {
+    }), v && v.addEventListener('click', function (e) {
       e.preventDefault();
       var r = e.target.dataset.review;
       console.log(r), (0, u.deleteReview)(r);
-    }), h && h.addEventListener('click', function (e) {
+    }), b && b.addEventListener('click', function (e) {
       e.preventDefault(), (0, s.deleteAccount)();
-    }), E && E.addEventListener('submit', function (e) {
+    }), w && w.addEventListener('submit', function (e) {
       e.preventDefault();
       var s = document.getElementById('landingEmail').value,
           o = document.getElementById('landingPassword').value;
       console.log(s, o), (0, r.login)(s, o);
-    }), B && h.addEventListener('click', function (e) {
+    }), h && b.addEventListener('click', function (e) {
       e.preventDefault();
       var r = e.target.dataset;
       console.log(r);
     });
-    var k = document.querySelector('body').dataset.alert;
-    k && (0, t.showAlert)('success', k, 7);
+    var B = document.querySelector('body').dataset.alert;
+    B && (0, t.showAlert)('success', B, 7);
   }, {
     'core-js/modules/es6.array.copy-within': 'c9DC',
     'core-js/modules/es6.array.fill': 'ZBH0',
@@ -8063,7 +8056,6 @@ parcelRequire = function (e, r, t, n) {
     './stripe': 'Uj2q',
     './alerts': 'odIX',
     './reviews': 'uYHd',
-    './tour': 'jxJY',
-    axios: 'uj17'
+    './tour': 'jxJY'
   }]
 }, {}, ['Focm'], null);

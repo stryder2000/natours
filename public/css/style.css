@@ -398,6 +398,7 @@ body {
     100% calc(100% - var(--section-rotate)),
     0 100%
   );
+  overflow: hidden;
 }
 
 .header__hero {
@@ -425,7 +426,7 @@ body {
     to(#28b487)
   );
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-  opacity: 0.85;
+  opacity: 0.6;
 }
 
 .heading-box {
@@ -483,16 +484,12 @@ body {
 
   .heading-box {
     width: 100%;
-    margin-left: 10%;
   }
 }
 /* 824px */
 @media only screen and (max-width: 51.5em) {
   .section-header {
     height: 70vw;
-  }
-  .heading-box {
-    left: 28%;
   }
   .heading-primary {
     font-size: 4.5rem;
@@ -734,6 +731,7 @@ body {
     100% calc(100% - var(--section-rotate)),
     0 100%
   );
+  overflow: hidden;
 }
 
 .reviews {
@@ -873,8 +871,8 @@ body {
 .section-cta {
   margin-top: calc(0px - var(--section-rotate));
   padding: 3rem;
-  padding-bottom: 11rem;
-  padding-top: calc(15rem + var(--section-rotate));
+  padding-bottom: 6rem;
+  padding-top: calc(5rem + var(--section-rotate));
   background-color: #f7f7f7;
 }
 
@@ -1417,7 +1415,7 @@ body {
     to(#28b487)
   );
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-  opacity: 0.7;
+  opacity: 0.4;
 }
 .card__picture-img {
   -o-object-fit: cover;
@@ -1547,7 +1545,7 @@ body {
 }
 
 .manage-tours:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 .line-h {
@@ -1912,58 +1910,93 @@ body {
 
 .deleteReviewBtn {
   display: inline-block;
-  background-color: #e23b3b;
-  padding: 0.5rem 1rem;
-  color: white;
+  background-color: #eb5c5c;
+  padding: 1.2rem;
   margin: 0.5rem;
-  position: absolute;
-  right: 1%;
-  bottom: 1%;
-  font-size: 1.5rem;
-  border-radius: 7px;
-  font-weight: 550;
+  border-radius: 10rem;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
 }
 
 .deleteReviewBtn:hover {
   box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+  background-color: #e23b3b;
+  transform: scale(1.02);
 }
 
 .deleteReviewBtn:focus,
 .deleteReviewBtn:active {
   box-shadow: 0;
-  background-color: #e23b3b;
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .delete-icon {
   height: 2rem;
   width: 2rem;
   fill: #fff;
+  display: block;
+  margin: 0 auto;
+}
+
+.admin-icon {
+  height: 3rem;
+  width: 3rem;
+  fill: rgba(255, 255, 255, 0.9);
+  display: inline-block;
+  margin-bottom: -5px;
+}
+
+.info-icon {
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  border-radius: 10rem;
+  display: inline-block;
+  font-weight: 400;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: none;
+  cursor: pointer;
+  background-color: #55c57a;
+}
+
+.info-icon:hover {
+  box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
+  background-color: #1cc454;
+  transform: scale(1.02);
+}
+
+.info-icon:focus,
+.info-icon:active {
+  box-shadow: 0;
+  transform: scale(1);
 }
 
 .deleteTourBtn {
   display: inline-block;
-  background-color: #e23b3b;
-  padding: 0.5rem 1rem;
+  background-color: #eb5c5c;
+  padding: 1.2rem;
   margin: 0.5rem;
-  border-radius: 7px;
+  border-radius: 10rem;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .deleteTourBtn:hover {
   box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+  background-color: #e23b3b;
+  transform: scale(1.02);
 }
 
 .deleteTourBtn:focus,
 .deleteTourBtn:active {
   box-shadow: 0;
-  background-color: #e23b3b;
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .deleteAccount {
@@ -1983,7 +2016,7 @@ body {
 @media only screen and (max-width: 38.75em) {
   .deleteAccount {
     font-size: 1.5rem;
-    padding: 0.7rem 1.2rem;
+    padding: 0.6rem 1rem;
   }
 }
 

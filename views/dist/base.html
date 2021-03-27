@@ -7,6 +7,58 @@
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,700" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const hideAlert = () => {
+          const el = document.querySelector('.alert');
+          if (el) el.parentElement.removeChild(el);
+      };
+      //type is success or error
+      const showAlert = (type, msg, time=7) => {
+          hideAlert();
+          const markup = `<div class="alert alert--${type}">${msg}</div>`;
+          document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+          window.setTimeout(hideAlert, time*1000);
+      };
+      
+      const deleteReview = async (reviewId) => {
+          try {
+              const url = '/api/v1/reviews/' + reviewId;
+      
+              const res = await axios({
+                  method: 'DELETE',
+                  url,
+              });
+              if (res.status === 204) {
+                  showAlert('success', `Comment deleted Successfully!`);
+      
+                  window.setTimeout(() => {
+                      location.reload();
+                  }, 1000);
+              }
+          } catch (err) {
+              showAlert('error', `Something went wrong!`);
+          }
+      };
+      const deleteTour = async (tourId) => {
+          try {
+              const url = '/api/v1/tours/' + tourId;
+              const res = await axios({
+              method: 'DELETE',
+              url,
+              });
+      
+              if (res.status == 204) {
+                  showAlert('success', `Tour deleted successfully!`);
+      
+                  window.setTimeout(() => {
+                      location.reload();
+                  }, 1000);
+              }
+          } catch (err) {
+              showAlert('error', `Something went wrong!`);
+          }
+      };
+    </script>
     <title>Natours | </title>
   </head>
   <body data-alert="" data-token="">

@@ -112,13 +112,15 @@ exports.getSignupForm = function (req, res, next) {
 };
 
 exports.getAccount = function (req, res, next) {
+  var activeBtn = [true, false, false, false, false, false, false, false];
   res.status(200).render('accountInfo', {
-    title: 'Your account'
+    title: 'Your account',
+    activeBtn: activeBtn
   });
 };
 
 exports.getMyTours = catchAsync(function _callee4(req, res, next) {
-  var bookings, tourIDs, tours;
+  var bookings, tourIDs, tours, activeBtn;
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -143,12 +145,14 @@ exports.getMyTours = catchAsync(function _callee4(req, res, next) {
 
         case 6:
           tours = _context4.sent;
+          activeBtn = [false, true, false, false, false, false, false, false];
           res.status(200).render('booked', {
             title: 'My Tours',
-            tours: tours
+            tours: tours,
+            activeBtn: activeBtn
           });
 
-        case 8:
+        case 9:
         case "end":
           return _context4.stop();
       }
@@ -156,7 +160,7 @@ exports.getMyTours = catchAsync(function _callee4(req, res, next) {
   });
 });
 exports.getAllTours = catchAsync(function _callee5(req, res, next) {
-  var tours;
+  var tours, activeBtn;
   return regeneratorRuntime.async(function _callee5$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -166,12 +170,14 @@ exports.getAllTours = catchAsync(function _callee5(req, res, next) {
 
         case 2:
           tours = _context5.sent;
+          activeBtn = [false, false, false, false, true, false, false, false];
           res.status(200).render('tours', {
             title: 'All Tours',
-            tours: tours
+            tours: tours,
+            activeBtn: activeBtn
           });
 
-        case 4:
+        case 5:
         case "end":
           return _context5.stop();
       }
@@ -179,7 +185,7 @@ exports.getAllTours = catchAsync(function _callee5(req, res, next) {
   });
 });
 exports.getAllUsers = catchAsync(function _callee6(req, res, next) {
-  var users;
+  var users, activeBtn;
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
@@ -189,12 +195,14 @@ exports.getAllUsers = catchAsync(function _callee6(req, res, next) {
 
         case 2:
           users = _context6.sent;
+          activeBtn = [false, false, false, false, false, true, false, false];
           res.status(200).render('users', {
             title: 'Manage Users',
-            users: users
+            users: users,
+            activeBtn: activeBtn
           });
 
-        case 4:
+        case 5:
         case "end":
           return _context6.stop();
       }
@@ -202,7 +210,7 @@ exports.getAllUsers = catchAsync(function _callee6(req, res, next) {
   });
 });
 exports.getMyReviews = catchAsync(function _callee7(req, res, next) {
-  var reviews;
+  var reviews, activeBtn;
   return regeneratorRuntime.async(function _callee7$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
@@ -214,12 +222,14 @@ exports.getMyReviews = catchAsync(function _callee7(req, res, next) {
 
         case 2:
           reviews = _context7.sent;
+          activeBtn = [false, false, true, false, false, false, false, false];
           res.status(200).render('reviews', {
             title: 'My Reviews',
-            reviews: reviews
+            reviews: reviews,
+            activeBtn: activeBtn
           });
 
-        case 4:
+        case 5:
         case "end":
           return _context7.stop();
       }
@@ -227,7 +237,7 @@ exports.getMyReviews = catchAsync(function _callee7(req, res, next) {
   });
 });
 exports.getAllReviews = catchAsync(function _callee8(req, res, next) {
-  var reviews, showUserName;
+  var reviews, showUserName, activeBtn;
   return regeneratorRuntime.async(function _callee8$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
@@ -238,49 +248,28 @@ exports.getAllReviews = catchAsync(function _callee8(req, res, next) {
         case 2:
           reviews = _context8.sent;
           showUserName = true;
+          activeBtn = [false, false, false, false, false, false, true, false];
           res.status(200).render('reviews', {
             title: 'Manage Reviews',
             reviews: reviews,
-            showUserName: showUserName
+            showUserName: showUserName,
+            activeBtn: activeBtn
           });
 
-        case 5:
+        case 6:
         case "end":
           return _context8.stop();
       }
     }
   });
 });
-exports.getAllUsers = catchAsync(function _callee9(req, res, next) {
-  var users;
+exports.updateUserData = catchAsync(function _callee9(req, res, next) {
+  var updatedUser;
   return regeneratorRuntime.async(function _callee9$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.next = 2;
-          return regeneratorRuntime.awrap(User.find());
-
-        case 2:
-          users = _context9.sent;
-          res.status(200).render('users', {
-            title: 'Manage Users',
-            users: users
-          });
-
-        case 4:
-        case "end":
-          return _context9.stop();
-      }
-    }
-  });
-});
-exports.updateUserData = catchAsync(function _callee10(req, res, next) {
-  var updatedUser;
-  return regeneratorRuntime.async(function _callee10$(_context10) {
-    while (1) {
-      switch (_context10.prev = _context10.next) {
-        case 0:
-          _context10.next = 2;
           return regeneratorRuntime.awrap(User.findByIdAndUpdate(req.user.id, {
             name: req.body.name,
             email: req.body.email
@@ -290,7 +279,7 @@ exports.updateUserData = catchAsync(function _callee10(req, res, next) {
           }));
 
         case 2:
-          updatedUser = _context10.sent;
+          updatedUser = _context9.sent;
           res.status(200).render('account', {
             title: 'Your account',
             user: updatedUser
@@ -298,7 +287,7 @@ exports.updateUserData = catchAsync(function _callee10(req, res, next) {
 
         case 4:
         case "end":
-          return _context10.stop();
+          return _context9.stop();
       }
     }
   });

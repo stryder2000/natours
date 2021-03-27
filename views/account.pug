@@ -12,19 +12,22 @@ block content
       .user-view
         nav.user-view__menu
           ul.side-nav
-            +navItem('/me', 'Settings', 'settings', true)
-            +navItem('/my-tours', 'My bookings', 'briefcase')
-            +navItem('/my-reviews', 'My reviews', 'star')
-            +navItem('#', 'Billing', 'credit-card')
+            +navItem('/me', 'Settings', 'settings', activeBtn[0])
+            +navItem('/my-tours', 'My bookings', 'briefcase', activeBtn[1])
+            +navItem('/my-reviews', 'My reviews', 'star', activeBtn[2])
+            +navItem('#', 'Billing', 'credit-card', activeBtn[3])
 
           - if(user.role === 'admin')
               .admin-nav
-                h5.admin-nav__heading Admin
+                h5.admin-nav__heading
+                  svg.admin-icon
+                    use(xlink:href=`img/icons.svg#icon-lock`)
+                  span &nbsp; Admin
                 ul.side-nav
-                  +navItem('/all-tours', 'Manage tours', 'map')
-                  +navItem('/manage-users', 'Manage users', 'users')
-                  +navItem('/manage-reviews', 'Manage reviews', 'star')
-                  +navItem('#', 'Billing', 'briefcase')
+                  +navItem('/all-tours', 'Manage tours', 'map', activeBtn[4])
+                  +navItem('/manage-users', 'Manage users', 'users', activeBtn[5])
+                  +navItem('/manage-reviews', 'Manage reviews', 'star', activeBtn[6])
+                  +navItem('#', 'Billing', 'briefcase', activeBtn[7])
 
         .user-view__content
           block accountInfo

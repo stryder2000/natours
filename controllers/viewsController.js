@@ -64,8 +64,10 @@ exports.getSignupForm = (req, res, next) => {
 };
 
 exports.getAccount = (req, res, next) => {
+  const activeBtn = [true, false, false, false, false, false, false, false];
   res.status(200).render('accountInfo', {
     title: 'Your account',
+    activeBtn,
   });
 };
 
@@ -76,9 +78,12 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   const tourIDs = bookings.map((el) => el.tour);
   const tours = await Tour.find({ _id: { $in: tourIDs } });
 
+  const activeBtn = [false, true, false, false, false, false, false, false];
+
   res.status(200).render('booked', {
     title: 'My Tours',
     tours,
+    activeBtn,
   });
 });
 
@@ -86,27 +91,38 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
   //1) Find all tours
   const tours = await Tour.find();
 
+  const activeBtn = [false, false, false, false, true, false, false, false];
+
   res.status(200).render('tours', {
     title: 'All Tours',
     tours,
+    activeBtn,
   });
 });
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   //1) Find all users
   const users = await User.find();
+
+  const activeBtn = [false, false, false, false, false, true, false, false];
+
   res.status(200).render('users', {
     title: 'Manage Users',
     users,
+    activeBtn,
   });
 });
 
 exports.getMyReviews = catchAsync(async (req, res, next) => {
   //1) Find all bookings
   const reviews = await Review.find({ user: req.user.id });
+
+  const activeBtn = [false, false, true, false, false, false, false, false];
+
   res.status(200).render('reviews', {
     title: 'My Reviews',
     reviews,
+    activeBtn,
   });
 });
 
@@ -114,20 +130,14 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
   //1) Find all bookings
   const reviews = await Review.find();
   const showUserName = true;
+
+  const activeBtn = [false, false, false, false, false, false, true, false];
+
   res.status(200).render('reviews', {
     title: 'Manage Reviews',
     reviews,
     showUserName,
-  });
-});
-
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  //1) Find all bookings
-  const users = await User.find();
-
-  res.status(200).render('users', {
-    title: 'Manage Users',
-    users,
+    activeBtn,
   });
 });
 

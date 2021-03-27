@@ -101,13 +101,6 @@ app.use((req, res, next) => {
 
 //app.use(morgan('tiny'));
 
-//ROUTES
-//app.get('/api/v1/tours', getAllTours);
-//app.get('/api/v1/tours/:id', getTourByID);
-//app.post('/api/v1/tours', createNewTour);
-//app.patch('/api/v1/tours/:id', updateTour);
-//app.delete('/api/v1/tours/:id', deleteTour);
-
 //Here we refactor our code to improve readability of our code.
 //We group together the HTTP methods that have same URL.
 app.use('/', viewsRouter);
@@ -117,10 +110,6 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
-  //    const err = new Error(`Can't find ${req.originalUrl} on the server!`);
-  //    err.statusCode = 404;
-  //    err.status = 'fail';
-  //    next(err);
   next(new AppError(`Can't find ${req.originalUrl} on the server!`, 404));
 });
 

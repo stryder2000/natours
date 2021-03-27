@@ -8,7 +8,7 @@ block accountInfo
           each review in reviews
             .reviews__card
               div
-                h6.reviews__user= review.tour.name
+                h6.reviews__user= review.tour ? review.tour.name : '( Deleted Tour )'
                 if showUserName == true
                   h6.reviews__username= review.user ? `( ${review.user.name} )` : ''
               p.reviews__text= review.review
@@ -18,4 +18,6 @@ block accountInfo
                       use(xlink:href='/img/icons.svg#icon-star')
               h3.reviews__date= `~${review.createdAt.toLocaleString().split(',')[0]}`
 
-              div.deleteReviewBtn(data-review=`${review.id}`) Delete
+              div.deleteReviewBtn
+                svg.delete-icon(onclick=`deleteReview('${review.id}')`)
+                  use(xlink:href=`img/icons.svg#icon-delete`)
