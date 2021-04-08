@@ -8,6 +8,8 @@ var User = require('../dev-data/models/userModel');
 
 var Booking = require('../dev-data/models/bookingModel');
 
+var Email = require('./../utils/email');
+
 var factory = require('./handlerFactory');
 
 var catchAsync = require('../utils/catchAsync');
@@ -78,7 +80,7 @@ exports.webhookCheckout = function _callee2(req, res, next) {
 
         case 8:
           if (!(event.type === 'checkout.session.completed')) {
-            _context2.next = 17;
+            _context2.next = 19;
             break;
           }
 
@@ -93,18 +95,22 @@ exports.webhookCheckout = function _callee2(req, res, next) {
           user = _context2.sent.id;
           price = session.display_items[0].amount / 100;
           _context2.next = 17;
+          return regeneratorRuntime.awrap(new Email(user, 'natours.trips@gmail.com').sendBookingSuccessful());
+
+        case 17:
+          _context2.next = 19;
           return regeneratorRuntime.awrap(Booking.create({
             tour: tour,
             user: user,
             price: price
           }));
 
-        case 17:
+        case 19:
           res.status(200).json({
             received: true
           });
 
-        case 18:
+        case 20:
         case "end":
           return _context2.stop();
       }

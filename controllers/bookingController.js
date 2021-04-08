@@ -4,7 +4,7 @@ const stripe = require('stripe')(
 const Tour = require('../dev-data/models/tourModel');
 const User = require('../dev-data/models/userModel');
 const Booking = require('../dev-data/models/bookingModel');
-
+const Email = require('./../utils/email');
 const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 
@@ -63,6 +63,7 @@ exports.webhookCheckout = async (req, res, next) => {
     const tour = session.client_reference_id;
     const user = (await User.findOne({ email: session.customer_email })).id;
     const price = session.display_items[0].amount / 100;
+    await new Email(user, 'natours.trips@gmail.com').sendBookingSuccessful();
     await Booking.create({ tour, user, price });
   }
 

@@ -1113,6 +1113,12 @@ body {
   visibility: hidden;
   transform: translateY(-4rem);
 }
+
+.forgot-password {
+  font-size: 1.6rem;
+  margin-left: 1rem;
+}
+
 .popup {
   z-index: 9999;
   height: 100vh;

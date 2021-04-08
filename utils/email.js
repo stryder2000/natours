@@ -6,36 +6,43 @@ module.exports = class Email {
   constructor(user, url) {
     this.from = `Siddharth Singh ${process.env.EMAIL_FROM}`;
     this.url = url;
-    this.firstname = user.name.split(' ')[0];
+    this.name = user.name;
     this.to = user.email;
   }
 
   async newTransport() {
-    if (process.env.NODE_ENV === 'production') {
-      //Gmail
-      return nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: process.env.GMAIL_USERNAME,
-          pass: process.env.GMAIL_PASSWORD,
-        },
-      });
-    }
     return nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
+      service: 'Gmail',
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.GMAIL_USERNAME,
+        pass: process.env.GMAIL_PASSWORD,
       },
     });
+    // if (process.env.NODE_ENV === 'production') {
+    //   //Gmail
+    //   return nodemailer.createTransport({
+    //     service: 'Gmail',
+    //     auth: {
+    //       user: process.env.GMAIL_USERNAME,
+    //       pass: process.env.GMAIL_PASSWORD,
+    //     },
+    //   });
+    // }
+    // return nodemailer.createTransport({
+    //   host: process.env.EMAIL_HOST,
+    //   port: process.env.EMAIL_PORT,
+    //   auth: {
+    //     user: process.env.EMAIL_USERNAME,
+    //     pass: process.env.EMAIL_PASSWORD,
+    //   },
+    // });
   }
 
   //Send the actual email
   async send(template, subject) {
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      firstName: this.firstName,
+      firstName: this.name,
       url: this.url,
       subject,
     });
@@ -63,5 +70,9 @@ module.exports = class Email {
       'passwordReset',
       'Your password reset token (valid for only 10 minutes.)'
     );
+  }
+
+  async sendBookingSuccessful() {
+    await this.send('bookingSuccess', 'Booking Confirmation');
   }
 };
