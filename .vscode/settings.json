@@ -12,5 +12,6 @@
     "prettier.tabWidth": 4,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "prettier.bracketSpacing": true
+    "prettier.bracketSpacing": true,
+    "cph.general.saveLocation": ""
   }

@@ -5,7 +5,7 @@ const Tour = require('./../models/tourModel.js');
 const User = require('./../models/userModel.js');
 const Review = require('./../models/reviewModel.js');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: '../../config.env' });
 
 const DB = process.env.DATABASE.replace(
     '<PASSWORD>',
@@ -13,12 +13,7 @@ const DB = process.env.DATABASE.replace(
 );
 
 mongoose
-    .connect(DB, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true
-    })
+    .connect(DB)
     .then(con => console.log('DB connection successful!'));
 
 const importData = async () => {
@@ -32,9 +27,9 @@ const importData = async () => {
         const reviews = JSON.parse(
             fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
         );
-        
+
         await Tour.create(tours);
-        await User.create(users, { validateBeforeSave : false });
+        await User.create(users, { validateBeforeSave: false });
         await Review.create(reviews);
         console.log('Data successfully loaded!');
     } catch (err) {

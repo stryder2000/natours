@@ -19,7 +19,7 @@ module.exports = class Email {
       },
     });
     // if (process.env.NODE_ENV === 'production') {
-    //   //Gmail
+    // Gmail
     //   return nodemailer.createTransport({
     //     service: 'Gmail',
     //     auth: {
